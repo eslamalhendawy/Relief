@@ -35,9 +35,6 @@ const Recommendations = () => {
 
   return (
     <section className="relative mb-12">
-      <div className="bg-[#DC2F02] text-[#003049]">
-        <span className="text-[#F8F9FA]"></span>
-      </div>
       <div className="px-4">
         <h4 className="text-navyColor text-center font-bold text-4xl lg:text-6xl pt-24 pb-12 capitalize">People recommendation</h4>
         <Swiper
