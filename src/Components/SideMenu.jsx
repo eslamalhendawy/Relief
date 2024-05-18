@@ -37,13 +37,13 @@ const SideMenu = () => {
               {open2 ? <ExpandLess /> : <ExpandMore />}{" "}
               <Collapse in={open2} timeout="auto" unmountOnExit>
               <ul>
-                <Link to="/live-in-care">
+                <Link  onClick={() => setOpen(false)} to="/live-in-care">
                   <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Live-In Care</li>
                 </Link>
-                <Link to="/short-term-care">
+                <Link  onClick={() => setOpen(false)} to="/short-term-care">
                   <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Short-Term Care</li>
                 </Link>
-                <Link to="/pricing">
+                <Link  onClick={() => setOpen(false)} to="/pricing">
                   <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Pricing</li>
                 </Link>
               </ul>

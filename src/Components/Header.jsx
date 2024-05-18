@@ -26,13 +26,13 @@ const Header = () => {
               <li className={linkClasses}>Services</li>
               <div className={`absolute left-0 w-[150px] bottom-[-110px] ${hidden && "hidden"}`}>
                 <ul className="border border-[#ADB5BD]">
-                  <Link to="/test" className="border-b border-[#ADB5BD] p-1 text-nowrap text-navyColor block">
+                  <Link to="/live-in-care" className="border-b border-[#ADB5BD] p-1 text-nowrap text-navyColor block">
                     Live-In Care
                   </Link>
-                  <Link to="/test" className="border-b border-[#ADB5BD] p-1 text-nowrap text-navyColor block">
+                  <Link to="/short-term-care" className="border-b border-[#ADB5BD] p-1 text-nowrap text-navyColor block">
                     Short-Term Care
                   </Link>
-                  <Link to="/test" className="p-1 text-nowrap text-navyColor block">
+                  <Link to="/pricing" className="p-1 text-nowrap text-navyColor block">
                     Pricing
                   </Link>
                 </ul>
@@ -47,8 +47,8 @@ const Header = () => {
           </ul>
         </div>
         <div className="hidden lg:flex items-center gap-4">
-          <Link className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">Login</Link>
-          <Link className="border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] duration-200 hover:text-navyColor py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">Sign Up</Link>
+          <Link to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">Login</Link>
+          <Link to="/sign-up" className="border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] duration-200 hover:text-navyColor py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">Sign Up</Link>
         </div>
         <SideMenu />
       </nav>

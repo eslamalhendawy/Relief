@@ -4,6 +4,7 @@ import CareSection from "./CareSection"
 import TypesOfCare from "./TypesOfCare"
 import Recommendations from "./Recommendations"
 import HowItWorks from "./HowItWorks"
+import Benefits from "./Benefits"
 
 const HomePage = () => {
   return (
@@ -14,6 +15,7 @@ const HomePage = () => {
       <TypesOfCare />
       <Recommendations />
       <HowItWorks />
+      <Benefits />
     </>
   )
 }
