@@ -8,43 +8,28 @@ const Recommendations = () => {
   const list = [
     {
       name: "mohamed khaled",
-      nameColor: "#003049",
       firstLine: "Standard & Hygienic",
-      firstLineColor: "",
       comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-      bgColor: "#BBD0FF",
     },
     {
       name: "mohamed khaled",
-      nameColor: "#F8F9FA",
       firstLine: "Standard & Hygienic",
-      firstLineColor: "",
       comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-      bgColor: "#EFAC6C",
     },
     {
       name: "mohamed khaled",
-      nameColor: "#F8F9FA",
       firstLine: "Standard & Hygienic",
-      firstLineColor: "",
       comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-      bgColor: "#DC2F02",
     },
     {
       name: "mohamed khaled",
-      nameColor: "#003049",
       firstLine: "Standard & Hygienic",
-      firstLineColor: "",
       comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-      bgColor: "#BBD0FF",
     },
     {
       name: "mohamed khaled",
-      nameColor: "#F8F9FA",
       firstLine: "Standard & Hygienic",
-      firstLineColor: "",
       comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-      bgColor: "#EFAC6C",
     },
   ];
 
@@ -76,8 +61,8 @@ const Recommendations = () => {
           loop={true}
         >
           {list.map((item, index) => (
-            <SwiperSlide className={``} key={index}>
-              <div className={`p-6 rounded-xl bg-[${item.bgColor}]`}>
+            <SwiperSlide key={index}>
+              <div className="p-6 rounded-xl bg-[#BBD0FF]">
                 <div className="flex items-center gap-2 mb-4">
                   <img src={user} alt="" className="cursor-pointer" />
                   <div>
