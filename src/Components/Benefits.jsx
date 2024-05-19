@@ -11,8 +11,8 @@ const Benefits = () => {
         <div className="flex flex-col items-center md:flex-row gap-8 mb-8">
           <div className="basis-1/2">
             <h5 className="text-navyColor font-semibold text-2xl md:text-4xl lg:text-6xl xl:text-7xl text-center md:text-left mb-6 capitalize">We’ve provided home care to over 20 towns and cities across egypt</h5>
-            <p className="text-[#8D99AE] text-lg lg:text-xl mb-8 capitalize">Whether you’re looking for long-term live-in care or respite care, we’ll connect you to trusted Egyptians carers with the right skills and experience.</p>
-            <Link className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-medium">find care near you </Link>
+            <p className="text-[#8D99AE] text-lg lg:text-xl mb-8 capitalize text-center md:text-left">Whether you’re looking for long-term live-in care or respite care, we’ll connect you to trusted Egyptians carers with the right skills and experience.</p>
+            <Link className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-medium block w-fit mx-auto md:mx-0">find care near you </Link>
           </div>
           <div className="basis-1/2 xl:max-w-[550px] xl:mx-auto">
             <img className="" src={benefits1} alt="" />
