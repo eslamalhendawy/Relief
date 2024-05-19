@@ -1,7 +1,14 @@
+import { useEffect } from "react";
+
 import heroImage from "/assets/hero.png";
 import phone from "/assets/phone.png"
 
 const ContactUs = () => {
+  useEffect(() => {
+    document.title = "Relief | Contact Us";
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <section className="container mx-auto px-4 py-12 flex gap-6 xl:gap-12 flex-col md:flex-row items-center">
       <div className="md:basis-1/2">

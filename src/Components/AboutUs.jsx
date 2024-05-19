@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import Features from "./Features";
@@ -8,6 +9,11 @@ import about2 from "/assets/aboutUs2.png";
 import about3 from "/assets/aboutUs3.png";
 
 const AboutUs = () => {
+  useEffect(() => {
+    document.title = "Relief | About Us";
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <section className="container mx-auto px-4 py-12 flex gap-6 xl:gap-12 flex-col md:flex-row items-center">
