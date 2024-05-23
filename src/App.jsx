@@ -5,6 +5,8 @@ import HomePage from "./Components/HomePage";
 import Footer from "./Components/Footer";
 import AboutUs from "./Components/AboutUs";
 import ContactUs from "./Components/ContactUs";
+import LiveInCare from "./Components/LiveInCare";
+import ShortTermCare from "./Components/ShortTermCare";
 
 function App() {
 
@@ -17,6 +19,8 @@ function App() {
           <Route path="/" exact element={<HomePage />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/live-in-care" element={<LiveInCare />} />
+          <Route path="/short-term-care" element={<ShortTermCare />} />
         </Routes>
         <Footer />
       </Router>
