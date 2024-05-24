@@ -15,9 +15,6 @@ const CareNavigation = () => {
           <li className='border border-[#8D99AE]  hover:border-[#BBD0FF] text-center text-[#8D99AE] hover:text-[#BBD0FF] duration-200 cursor-pointer rounded-xl w-fit py-1 px-4 text-nowrap'>
             <a href="#pricing">Pricing</a>
           </li>
-          <li className='border border-[#8D99AE]  hover:border-[#BBD0FF] text-center text-[#8D99AE] hover:text-[#BBD0FF] duration-200 cursor-pointer rounded-xl w-fit py-1 px-4 text-nowrap'>
-            <a href="#fqa">FAQ</a>
-          </li>
         </ul>
       </div>
     </section>
