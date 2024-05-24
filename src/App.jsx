@@ -7,6 +7,7 @@ import AboutUs from "./Components/AboutUs";
 import ContactUs from "./Components/ContactUs";
 import LiveInCare from "./Components/LiveInCare";
 import ShortTermCare from "./Components/ShortTermCare";
+import Pricing from "./Components/Pricing";
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/contact-us" element={<ContactUs />} />
           <Route path="/live-in-care" element={<LiveInCare />} />
           <Route path="/short-term-care" element={<ShortTermCare />} />
+          <Route path="/pricing" element={<Pricing />} />
         </Routes>
         <Footer />
       </Router>
