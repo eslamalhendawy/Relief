@@ -3,6 +3,7 @@ import Features from "./Features";
 import ReliefCost from "./ReliefCost";
 import CareBenefits from "./CareBenefits";
 import CareFeature from "./CareFeature";
+import Expert from "./Expert";
 
 const Pricing = () => {
   return (
@@ -12,6 +13,7 @@ const Pricing = () => {
       <ReliefCost />
       <CareBenefits />
       <CareFeature />
+      <Expert />
     </>
   )
 }

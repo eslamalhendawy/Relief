@@ -50,9 +50,7 @@ const ReliefCost = () => {
             <div className="flex items-center gap-6">
               <div>
                 <span className="text-[#8D99AE] text-lg">3 Days From</span>
-                <p className="text-[#0096C7] font-medium text-2xl mb-6">
-                  650 EGP
-                </p>
+                <p className="text-[#0096C7] font-medium text-2xl mb-6">650 EGP</p>
               </div>
               <div>
                 <span className="text-[#8D99AE] text-lg">From</span>
@@ -61,11 +59,11 @@ const ReliefCost = () => {
                 </p>
               </div>
             </div>
-            <p className="text-pColor text-[20px] mb-4">Full time care (also called live-in care) gives people the choice to be cared for in their own homes. Full time care includes: </p>
+            <p className="text-pColor text-[20px] mb-4">Relief can arrange short-term respite care for shorter periods. A carer will move into the home and provide expert care.</p>
             <ul className="text-navyColor flex flex-col gap-4 mb-6">
               <li className="flex items-center gap-2">
                 <img src={check} alt="" />
-                <p className="font-medium text-[20px]">One week trial</p>
+                <p className="font-medium text-[20px]">Fast turnaround</p>
               </li>
               <li className="flex items-center gap-2">
                 <img src={check} alt="" />
