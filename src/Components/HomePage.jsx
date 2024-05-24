@@ -21,7 +21,7 @@ const HomePage = () => {
       <CareSection />
       <TypesOfCare />
       <Recommendations />
-      <HowItWorks />
+      <HowItWorks showP={true} />
       <Benefits />
     </>
   );

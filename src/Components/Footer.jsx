@@ -23,7 +23,7 @@ const Footer = () => {
           </div>
           <div>
             <h6 className="uppercase text-[#00B4D8] text-center lg:text-left mb-2 text-lg">Company</h6>
-            <ul className="text-center lg:text-left text-[#F8F9FA]">
+            <ul className="text-center lg:text-left text-[#F8F9FA] uppercase">
               <li>
                 <Link to="/">Home</Link>
               </li>

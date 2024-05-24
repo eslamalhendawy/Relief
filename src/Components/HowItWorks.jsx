@@ -1,4 +1,4 @@
-const HowItWorks = () => {
+const HowItWorks = ({ showP }) => {
   const list = [
     {
       image: "/assets/hiw1.png",
@@ -21,16 +21,16 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="container mx-auto py-24 px-4">
-      <h4 className="text-navyColor text-center font-bold text-4xl lg:text-6xl mb-8 capitalize">how it works</h4>
-      <p className="text-center text-pColor font-medium text-lg lg:text-xl sm:w-[70%] xl:w-[50%] mx-auto mb-8">Combining care expertise and intuitive online tools, we’ll work with you to make arranging care as smooth as possible.</p>
+    <section id="howItWorks" className="container mx-auto py-24 px-4">
+      <h4 className={`text-navyColor text-center font-bold text-4xl lg:text-6xl capitalize ${showP ? "mb-8" : "mb-24"}`}>how it works</h4>
+      {showP && <p className="text-center text-pColor font-medium text-lg lg:text-xl sm:w-[70%] xl:w-[50%] mx-auto mb-8">Combining care expertise and intuitive online tools, we’ll work with you to make arranging care as smooth as possible.</p>}
       <div className="flex flex-col lg:flex-row items-center gap-8 xl:gap-20">
         {list.map((item, index) => (
           <div className="flex flex-col lg:basis-1/3 max-w-[500px]" key={index}>
             <img className="" src={item.image} alt="" />
             <div className="bg-[#F6F3EF] p-4 rounded-b-xl lg:h-[300px] xl:h-[265px] 2xl:h-[240px]">
-              <h5 className="text-navyColor font-semibold text-2xl mb-3">{item.firstLine}</h5>
-              <p className="capitalize text-[#8D99AE] font-medium text-lg">
+              <h5 className="text-navyColor font-semibold text-2xl mb-3 text-center lg:text-left">{item.firstLine}</h5>
+              <p className="capitalize text-[#8D99AE] font-medium text-lg text-center lg:text-left">
                 <span className="text-navyColor">{item.special} </span>
                 {item.paragraph}
               </p>
