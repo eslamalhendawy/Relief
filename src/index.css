@@ -10,3 +10,7 @@
     scroll-behavior: smooth;
   }
 }
+
+.minHeight{
+  min-height: calc(100vh - 380px);
+}

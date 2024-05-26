@@ -8,6 +8,8 @@ import ContactUs from "./Components/ContactUs";
 import LiveInCare from "./Components/LiveInCare";
 import ShortTermCare from "./Components/ShortTermCare";
 import Pricing from "./Components/Pricing";
+import Login from "./Components/Login";
+import SignUp from "./Components/SignUp";
 
 function App() {
 
@@ -23,6 +25,8 @@ function App() {
           <Route path="/live-in-care" element={<LiveInCare />} />
           <Route path="/short-term-care" element={<ShortTermCare />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
         </Routes>
         <Footer />
       </Router>

@@ -36,7 +36,7 @@ const Recommendations = () => {
   return (
     <section className="relative mb-12">
       <div className="px-4">
-        <h4 className="text-navyColor text-center font-bold text-4xl lg:text-6xl pt-24 pb-12 capitalize">People recommendation</h4>
+        <h4 className="text-navyColor text-center font-bold text-4xl lg:text-6xl pt-24 pb-12 capitalize">Available for work</h4>
         <Swiper
           className="relative z-[2]"
           spaceBetween={50}
