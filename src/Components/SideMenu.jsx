@@ -16,7 +16,7 @@ const SideMenu = () => {
     setOpen(openStatus);
   };
 
-  const linkClasses = "border-b border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 p-3 block text-xl";
+  const linkClasses = "border-b border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 p-3 block text-xl cursor-pointer";
 
   return (
     <aside className="lg:hidden">
@@ -54,6 +54,12 @@ const SideMenu = () => {
             </Link>
             <Link onClick={() => setOpen(false)} to="/contact-us" className={linkClasses}>
               <li>Contact Us</li>
+            </Link>
+            <Link onClick={() => setOpen(false)} to="/login" className={linkClasses}>
+              <li>Log In</li>
+            </Link>
+            <Link onClick={() => setOpen(false)} to="/sign-up" className={linkClasses}>
+              <li>Sign Up</li>
             </Link>
           </ul>
         </div>
