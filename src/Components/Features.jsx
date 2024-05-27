@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import check from "/assets/SealCheck.png";
 import clock from "/assets/Clock.png";
 import strategy from "/assets/Strategy.png"; 
@@ -29,7 +31,7 @@ const Features = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <button className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-4 rounded-xl text-lg font-[500]">get started with relief </button>
+        <Link to="/get-started" className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-4 rounded-xl text-lg font-[500]">get started with relief </Link>
       </div>
     </section>
   )

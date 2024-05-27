@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 import image from "/assets/loginImage.png";
@@ -6,6 +6,11 @@ import flag from "/assets/egypt.png"
 
 const SignUp = () => {
   const [hidden, setHidden] = useState(true);
+
+  useEffect(() => {
+    document.title = "Relief | Sign Up";
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <section className="container mx-auto px-4 py-16 minHeight flex justify-center items-center">

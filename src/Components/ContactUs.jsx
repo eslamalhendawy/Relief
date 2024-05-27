@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 import heroImage from "/assets/hero.png";
-import phone from "/assets/phone.png"
+import phone from "/assets/phone.png";
 
 const ContactUs = () => {
   useEffect(() => {

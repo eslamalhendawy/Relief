@@ -10,6 +10,9 @@ import ShortTermCare from "./Components/ShortTermCare";
 import Pricing from "./Components/Pricing";
 import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
+import SpeakToExpert from "./Components/SpeakToExpert";
+import GetStarted from "./Components/GetStarted";
+import ChooseCareReceiver from "./Components/ChooseCareReceiver";
 
 function App() {
 
@@ -27,6 +30,9 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/speak-to-expert" element={<SpeakToExpert />} />
+          <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/choose-care-receiver" element={<ChooseCareReceiver />} />
         </Routes>
         <Footer />
       </Router>

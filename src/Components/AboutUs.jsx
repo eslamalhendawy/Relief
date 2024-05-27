@@ -24,7 +24,7 @@ const AboutUs = () => {
           <p className="text-[#3E5C76] font-[500] text-center md:text-left mb-4 lg:mb-24 text-lg xl:text-xl">Find out what makes us different, and how we can help, no matter where you are in your journey.</p>
           <div className="flex flex-col lg:flex-row items-center gap-6">
             <Link className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-[500] border border-accent">get started online</Link>
-            <Link className="capitalize border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 py-2 px-6 rounded-xl text-lg font-[500]">speak to an expert</Link>
+            <Link to="/speak-to-expert" className="capitalize border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 py-2 px-6 rounded-xl text-lg font-[500]">speak to an expert</Link>
           </div>
         </div>
         <div className="md:basis-1/2">
