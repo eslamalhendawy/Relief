@@ -105,7 +105,7 @@ const ForMe = () => {
             <button onClick={() => navigate(-1)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 px-12 rounded-xl font-[500] text-center">
               Back
             </button>
-            <button onClick={handleStage1} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl text-xs md:text-lg font-[500] border border-accent text-center">
+            <button onClick={handleStage1} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl font-[500] border border-accent text-center">
               Next
             </button>
           </div>
@@ -124,7 +124,7 @@ const ForMe = () => {
             <button onClick={() => setStage(1)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 px-12 rounded-xl font-[500] text-center">
               Back
             </button>
-            <button onClick={() => setStage(3)} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl text-xs md:text-lg font-[500] border border-accent text-center">
+            <button onClick={() => setStage(3)} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl font-[500] border border-accent text-center">
               Next
             </button>
           </div>
@@ -227,10 +227,10 @@ const ForMe = () => {
 
 
           <div className="flex items-center justify-between lg:w-[80%] xl:w-[70%] lg:mx-auto">
-            <button onClick={() => setStage(3)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 px-12 rounded-xl font-[500] text-center">
+            <button onClick={() => setStage(3)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 w-[150px] rounded-xl font-[500] text-center">
               Back
             </button>
-            <button onClick={sendRequest} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl text-xs md:text-lg font-[500] border border-accent text-center">
+            <button onClick={sendRequest} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[150px] rounded-xl font-[500] border border-accent text-center">
               Send Request
             </button>
           </div>
