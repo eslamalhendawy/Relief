@@ -1,7 +1,12 @@
+import { useAppContext } from "../Context/AppContext";
+import { Link } from "react-router-dom";
+
 import cardLogo from "/assets/cardLogo.png";
 import check from "/assets/hollowCheck.png";
 
 const ReliefCost = () => {
+  const { userData } = useAppContext();
+
   return (
     <section className="bg-[#f6f3ef]">
       <div className="container mx-auto px-4 py-16">
@@ -40,7 +45,7 @@ const ReliefCost = () => {
                 <p className="font-medium text-[20px]">No joining fees </p>
               </li>
             </ul>
-            <button className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl text-lg border border-accent">Get Started</button>
+            <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-12 rounded-xl text-lg border border-accent">Get Started</Link>
           </div>
           <div className="bg-white px-4 py-6 rounded-xl">
             <div className="flex items-center gap-4 mb-6">
@@ -82,7 +87,7 @@ const ReliefCost = () => {
                 <p className="font-medium text-[20px]">No joining fees </p>
               </li>
             </ul>
-            <button className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-xl text-lg border border-accent">Get Started</button>
+            <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-12 rounded-xl text-lg border border-accent">Get Started</Link>
           </div>
         </div>
       </div>

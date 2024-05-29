@@ -1,4 +1,6 @@
 import { useEffect } from "react";
+import { useAppContext } from "../Context/AppContext";
+import { Link } from "react-router-dom";
 
 import CareHero from "./CareHero";
 import CareNavigation from "./CareNavigation";
@@ -10,6 +12,7 @@ import ShortTermPricing from "./ShortTermPricing";
 import CallAdvisor from "./CallAdvisor";
 
 const ShortTermCare = () => {
+  const { userData } = useAppContext();
   useEffect(() => {
     document.title = "Relief | Short-Term Care";
     window.scrollTo(0, 0);
@@ -23,7 +26,7 @@ const ShortTermCare = () => {
       <CareFeature />
       <HowItWorks showP={false} />
       <div className="flex justify-center mb-6 lg:mb-12">
-        <button className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-[500] border border-accent">Get Started</button>
+        <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-[500] border border-accent">Get Started</Link>
       </div>
       <CareBenefits />
       <ShortTermPricing />

@@ -1,4 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useAppContext } from "./Context/AppContext";
+import { useEffect } from "react";
+import { getData } from "./Services/apiCalls";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./Components/Header";
 import HomePage from "./Components/HomePage";
@@ -13,9 +19,38 @@ import SignUp from "./Components/SignUp";
 import SpeakToExpert from "./Components/SpeakToExpert";
 import GetStarted from "./Components/GetStarted";
 import ChooseCareReceiver from "./Components/ChooseCareReceiver";
+import ForMe from "./Components/ForMe";
+import ForSomeone from "./Components/ForSomeone";
 
 function App() {
+  const loggedIn = Boolean(localStorage.getItem("userToken"));
+  const { setUserData } = useAppContext();
 
+  useEffect(() => {
+    if (loggedIn) {
+      const token = localStorage.getItem("userToken");
+      setUserData({
+        name: "John Doe",
+        email: "test@test.com",
+        phone: "01012609957",
+        address: "123, Random Street",
+        avatar: "random",
+        loggedIn: true,
+      });
+      // getData("users", token).then((response) => {
+      //   if(response.status === "success") {
+      //     setUserData({
+      //       name: response.data.user.name,
+      //       email: response.data.user.email,
+      //       phone: response.data.user.phone,
+      //       address: response.data.user.address,
+      //       avatar: response.data.user.photo,
+      //       loggedIn: true,
+      //     });
+      //   }
+      // });
+    }
+  }, []);
 
   return (
     <>
@@ -33,11 +68,14 @@ function App() {
           <Route path="/speak-to-expert" element={<SpeakToExpert />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/choose-care-receiver" element={<ChooseCareReceiver />} />
+          <Route path="/for-me" element={<ForMe />} />
+          <Route path="/for-someone" element={<ForSomeone />} />
         </Routes>
         <Footer />
       </Router>
+      <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,3 +1,4 @@
+import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 
 import benefits1 from "/assets/benefits1.png";
@@ -5,6 +6,8 @@ import benefits2 from "/assets/benefits2.png";
 import benefits3 from "/assets/benefits3.png";
 
 const Benefits = () => {
+  const { userData } = useAppContext();
+
   return (
     <section className="bg-[#f6f3ef] py-12 px-4">
       <div className="container mx-auto">
@@ -12,7 +15,7 @@ const Benefits = () => {
           <div className="basis-1/2">
             <h5 className="text-navyColor font-semibold text-2xl md:text-4xl lg:text-6xl xl:text-7xl text-center md:text-left mb-6 capitalize">We’ve provided home care to over 20 towns and cities across egypt</h5>
             <p className="text-[#8D99AE] text-lg lg:text-xl mb-8 capitalize text-center md:text-left">Whether you’re looking for long-term live-in care or respite care, we’ll connect you to trusted Egyptians carers with the right skills and experience.</p>
-            <Link className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-medium block w-fit mx-auto md:mx-0">find care near you </Link>
+            <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-medium block w-fit mx-auto md:mx-0">find care near you</Link>
           </div>
           <div className="basis-1/2 xl:max-w-[550px] xl:mx-auto">
             <img className="" src={benefits1} alt="" />

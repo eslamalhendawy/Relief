@@ -1,3 +1,4 @@
+import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 
 import check from "/assets/SealCheck.png";
@@ -6,6 +7,8 @@ import strategy from "/assets/Strategy.png";
 import dollar from "/assets/Money.png";
 
 const Features = () => {
+  const { userData } = useAppContext();
+
   return (
     <section className='bg-sectionColor py-12 px-4'> 
       <div className='container mx-auto   text-[#E9ECEF] flex flex-col lg:flex-row gap-8 mb-12'>
@@ -31,7 +34,7 @@ const Features = () => {
         </div>
       </div>
       <div className="flex justify-center">
-        <Link to="/get-started" className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-4 rounded-xl text-lg font-[500]">get started with relief </Link>
+        <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-4 rounded-xl text-lg font-[500]">get started with relief </Link>
       </div>
     </section>
   )

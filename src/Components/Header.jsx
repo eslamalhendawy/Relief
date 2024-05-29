@@ -1,20 +1,29 @@
 import { useState } from "react";
+import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
-import logo from "/assets/logo.png";
 
 import SideMenu from "./SideMenu";
 
+import logo from "/assets/logo.png";
+import avatar from "/assets/randomUser.png";
+
 const Header = () => {
   const [hidden, setHidden] = useState(true);
+  const { userData, setUserData } = useAppContext();
 
   const linkClasses = "border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 px-4 py-1 rounded-xl";
+
+  const handleLogout = () => {
+    setUserData({ loggedIn: false });
+    localStorage.removeItem("userToken");
+  };
 
   return (
     <header className="container mx-auto px-2">
       <nav className="flex items-center justify-between">
         <div className="flex items-center gap-12">
           <div>
-            <Link to="/">
+            <Link onClick={() => setHidden(true)} to="/">
               <img src={logo} alt="" />
             </Link>
           </div>
@@ -25,7 +34,7 @@ const Header = () => {
             <div onClick={() => setHidden(!hidden)} className="cursor-pointer relative">
               <li className={linkClasses}>Services</li>
               <div className={`absolute left-0 w-[150px] bottom-[-110px] ${hidden && "hidden"}`}>
-                <ul className="border border-[#ADB5BD]">
+                <ul className="border border-[#ADB5BD] bg-white">
                   <Link to="/live-in-care" className="border-b border-[#ADB5BD] p-1 text-nowrap text-navyColor block">
                     Live-In Care
                   </Link>
@@ -47,8 +56,18 @@ const Header = () => {
           </ul>
         </div>
         <div className="hidden lg:flex items-center gap-4">
-          <Link to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">Login</Link>
-          <Link to="/sign-up" className="border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] duration-200 hover:text-navyColor py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">Sign Up</Link>
+          {userData.loggedIn ? (
+            <img onClick={handleLogout} className="size-[60px] cursor-pointer" src={avatar} alt="" />
+          ) : (
+            <>
+              <Link to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
+                Login
+              </Link>
+              <Link to="/sign-up" className="border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] duration-200 hover:text-navyColor py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
         <SideMenu />
       </nav>
