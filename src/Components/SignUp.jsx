@@ -13,7 +13,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [location, setLocation] = useState("");
+  const [long, setLong] = useState("");
+  const [lat, setLat] = useState("");
   const [hidden, setHidden] = useState(true);
   const { setUserData } = useAppContext();
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const SignUp = () => {
   }, []);
 
   const handleClick = async () => {
-    if (username === "" || email === "" || password === "" || phone === "" || location === "") {
+    if (username === "" || email === "" || password === "" || phone === "" || long === "" || lat === "") {
       return toast.error("Please fill all the fields");
     }
     if (!email.match(regEmail)) {
@@ -50,6 +51,18 @@ const SignUp = () => {
     });
     localStorage.setItem("userToken", "123");
     navigate("/");
+  };
+
+  const handleLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let long = position.coords.longitude;
+        setLong(long);
+        setLat(lat);
+        // window.open(`https://www.google.com/maps/dir/${lat},${long}/${place.latitude},${place.longitude}`, "_blank");
+      });
+    }
   };
 
   return (
@@ -94,7 +107,8 @@ const SignUp = () => {
               Location
             </label>
             <div className="relative">
-              <input onChange={(e) => setLocation(e.target.value)} className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder="Enter your location" />
+              {/* <input onChange={(e) => setLocation(e.target.value)} className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder="Enter your location" /> */}
+              <button onClick={handleLocation} className={`w-full text-left outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl ${long !== "" && "bg-[#BBD0FF]"}`}>{lat === "" || long === "" ? "Enter your location" : "Location Saved"}</button>
               <img src={flag} className="absolute text-[#6C757D] left-1 top-[50%] translate-y-[-50%] border-r border-[#6C757D] pr-1" />
             </div>
           </div>
