@@ -48,7 +48,7 @@ const UpdatePFPModal = () => {
               <input onChange={handleChange} ref={fileInput} type="file" className="hidden" accept="image/*" />
             </div>
             <div className="flex justify-center mb-4">
-              {image ? <img src={image} alt="new profile photo" className="rounded-full" /> : "No Image Selected"}
+              {image ? <img src={image} alt="new profile photo" className="rounded-full size-[250px]" /> : "No Image Selected"}
             </div>
             <div className="flex justify-center items-center mb-4">
               <button onClick={handleUpload} className="text-lg bg-accent hover:bg-red-700 duration-200 text-white py-2 w-[200px] font-medium">

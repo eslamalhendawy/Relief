@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 
 import Drawer from "@mui/material/SwipeableDrawer";
@@ -9,6 +10,7 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 const SideMenu = () => {
   const [openMenu, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const { userData } = useAppContext();
   const toggleMenu = (openStatus) => (event) => {
     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
@@ -33,21 +35,21 @@ const SideMenu = () => {
               <li>Home</li>
             </Link>
             <li onClick={() => setOpen2(open2 === true ? false : true)} className={linkClasses}>
-              <span>Services</span> 
+              <span>Services</span>
               {open2 ? <ExpandLess /> : <ExpandMore />}{" "}
               <Collapse in={open2} timeout="auto" unmountOnExit>
-              <ul>
-                <Link  onClick={() => setOpen(false)} to="/live-in-care">
-                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Live-In Care</li>
-                </Link>
-                <Link  onClick={() => setOpen(false)} to="/short-term-care">
-                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Short-Term Care</li>
-                </Link>
-                <Link  onClick={() => setOpen(false)} to="/pricing">
-                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Pricing</li>
-                </Link>
-              </ul>
-            </Collapse>
+                <ul>
+                  <Link onClick={() => setOpen(false)} to="/live-in-care">
+                    <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Live-In Care</li>
+                  </Link>
+                  <Link onClick={() => setOpen(false)} to="/short-term-care">
+                    <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Short-Term Care</li>
+                  </Link>
+                  <Link onClick={() => setOpen(false)} to="/pricing">
+                    <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Pricing</li>
+                  </Link>
+                </ul>
+              </Collapse>
             </li>
             <Link onClick={() => setOpen(false)} to="/about-us" className={linkClasses}>
               <li>About Us</li>
@@ -55,12 +57,20 @@ const SideMenu = () => {
             <Link onClick={() => setOpen(false)} to="/contact-us" className={linkClasses}>
               <li>Contact Us</li>
             </Link>
-            <Link onClick={() => setOpen(false)} to="/login" className={linkClasses}>
-              <li>Log In</li>
-            </Link>
-            <Link onClick={() => setOpen(false)} to="/sign-up" className={linkClasses}>
-              <li>Sign Up</li>
-            </Link>
+            {userData.loggedIn ? (
+              <Link onClick={() => setOpen(false)} to="/profile" className={linkClasses}>
+                <li>Profile</li>
+              </Link>
+            ) : (
+              <>
+                <Link onClick={() => setOpen(false)} to="/login" className={linkClasses}>
+                  <li>Log In</li>
+                </Link>
+                <Link onClick={() => setOpen(false)} to="/sign-up" className={linkClasses}>
+                  <li>Sign Up</li>
+                </Link>
+              </>
+            )}
           </ul>
         </div>
       </Drawer>

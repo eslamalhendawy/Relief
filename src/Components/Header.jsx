@@ -9,14 +9,10 @@ import avatar from "/assets/randomUser.png";
 
 const Header = () => {
   const [hidden, setHidden] = useState(true);
-  const { userData, setUserData } = useAppContext();
+  const { userData } = useAppContext();
 
   const linkClasses = "border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 px-4 py-1 rounded-xl";
 
-  const handleLogout = () => {
-    setUserData({ loggedIn: false });
-    localStorage.removeItem("userToken");
-  };
 
   return (
     <header className="container mx-auto px-2">
