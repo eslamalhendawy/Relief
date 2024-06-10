@@ -22,6 +22,9 @@ import ChooseCareReceiver from "./Components/ChooseCareReceiver";
 import ForMe from "./Components/ForMe";
 import ForSomeone from "./Components/ForSomeone";
 import Profile from "./Components/Profile";
+import CarerSignUp from "./Components/CarerSignUp";
+import CarerSchedule from "./Components/CarerSchedule";
+import CarerNotifactions from "./Components/CarerNotifactions";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
@@ -72,6 +75,9 @@ function App() {
           <Route path="/for-me" element={<ForMe />} />
           <Route path="/for-someone" element={<ForSomeone />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/carer-sign-up" element={<CarerSignUp />} />
+          <Route path="/carer-schedule" element={<CarerSchedule />} />
+          <Route path="/carer-notifications" element={<CarerNotifactions />} />
         </Routes>
         <Footer />
       </Router>

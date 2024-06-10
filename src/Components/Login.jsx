@@ -35,6 +35,7 @@ const Login = () => {
       phone: "01012609957",
       address: "123, Random Street",
       avatar: "random",
+      role: "elder",
       loggedIn: true,
     });
     localStorage.setItem("userToken", "123");
