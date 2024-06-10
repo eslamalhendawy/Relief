@@ -14,3 +14,7 @@
 .minHeight{
   min-height: calc(100vh - 380px);
 }
+
+.rp-root{
+  z-index: 1301 !important;
+}

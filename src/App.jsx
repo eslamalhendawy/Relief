@@ -21,6 +21,7 @@ import GetStarted from "./Components/GetStarted";
 import ChooseCareReceiver from "./Components/ChooseCareReceiver";
 import ForMe from "./Components/ForMe";
 import ForSomeone from "./Components/ForSomeone";
+import Profile from "./Components/Profile";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
@@ -70,6 +71,7 @@ function App() {
           <Route path="/choose-care-receiver" element={<ChooseCareReceiver />} />
           <Route path="/for-me" element={<ForMe />} />
           <Route path="/for-someone" element={<ForSomeone />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <Footer />
       </Router>

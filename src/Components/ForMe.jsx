@@ -212,7 +212,7 @@ const ForMe = () => {
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">What is the full address of {userData.name}'s home?</h3>
             <div className="flex flex-col gap-3">
-            <input onChange={(e) => setQ9(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl" type="text" id="email" placeholder={`Enter ${userData.name}'s Location`} />
+            <input onChange={(e) => setQ9(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder={`Enter ${userData.name}'s Location`} />
             </div>
           </div>
 

@@ -57,7 +57,7 @@ const Header = () => {
         </div>
         <div className="hidden lg:flex items-center gap-4">
           {userData.loggedIn ? (
-            <img onClick={handleLogout} className="size-[60px] cursor-pointer" src={avatar} alt="" />
+            <Link to="/profile"><img className="size-[60px] cursor-pointer" src={avatar} alt="" /></Link>
           ) : (
             <>
               <Link to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
