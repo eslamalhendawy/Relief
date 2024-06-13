@@ -137,7 +137,7 @@ const ForMe = () => {
               <span className="text-[#ADB5BD] font-medium text-sm md:text-base uppercase">Start arranging care</span>
               <h3 className="font-semibold mb-8 md:text-xl">Select the type of care you would like for {userData.name}</h3>
               <div className="flex flex-col gap-3 mb-12">
-                <button className={`text-center border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl capitalize font-medium`}>Find out and choose a caregiver</button>
+                <button onClick={() => navigate("/choose-carer")} className={`text-center border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl capitalize font-medium`}>Find out and choose a caregiver</button>
                 <button onClick={() => setStage(4)} className={`text-center border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl capitalize font-medium`}>
                   share your care request
                 </button>
@@ -234,6 +234,11 @@ const ForMe = () => {
               Send Request
             </button>
           </div>
+        </div>
+      )}
+      {stage === 5 && (
+        <div>
+
         </div>
       )}
     </section>
