@@ -38,3 +38,8 @@
   animation: glow 1.5s infinite;
   position: relative;
 }
+
+.MuiRating-root{
+  font-size: 1.8rem !important;
+  color: #ffd700 !important;
+}

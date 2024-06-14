@@ -224,8 +224,6 @@ const ForMe = () => {
               </button>
             </div>
           </div>
-
-
           <div className="flex items-center justify-between lg:w-[80%] xl:w-[70%] lg:mx-auto">
             <button onClick={() => setStage(3)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 w-[150px] rounded-xl font-[500] text-center">
               Back
@@ -234,11 +232,6 @@ const ForMe = () => {
               Send Request
             </button>
           </div>
-        </div>
-      )}
-      {stage === 5 && (
-        <div>
-
         </div>
       )}
     </section>
