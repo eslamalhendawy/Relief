@@ -49,9 +49,9 @@ const Profile = () => {
           </div>
           <div>
             {userData.role === "carer" ? (
-              <button>
+              <Link to="/carer-schedule">
                 <i className="fa-solid fa-calendar-check  text-3xl hover:text-[#00B4D8] duration-200"></i>
-              </button>
+              </Link>
             ) : (
               <button>
                 <i className="fa-regular fa-bell text-3xl hover:text-[#00B4D8] duration-200"></i>

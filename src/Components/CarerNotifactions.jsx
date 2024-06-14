@@ -6,19 +6,19 @@ const CarerNotifactions = () => {
       name: "Mohamed Khalid",
       location: "5th Settlement, egypt",
       phone: "01023659988",
-      date: "15/6  - 3AM",
+      date: "15/6  - 3AM, 15 DAYS",
     },
     {
       name: "Mohamed Khalid",
       location: "5th Settlement, egypt",
       phone: "01023659988",
-      date: "15/6  - 3AM",
+      date: "15/6  - 3AM, 15 DAYS",
     },
     {
       name: "Mohamed Khalid",
       location: "5th Settlement, egypt",
       phone: "01023659988",
-      date: "15/6  - 3AM",
+      date: "15/6  - 3AM, 15 DAYS",
     },
   ];
   return (
@@ -29,17 +29,17 @@ const CarerNotifactions = () => {
           {list.map((item, index) => (
             <div key={index}>
               <div className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor mb-4">
-                <p className="font-semibold text-xl">
+                <p className="font-semibold text-xl mb-2">
                   Name: <span className="font-medium">{item.name}</span>
                 </p>
-                <p className="font-semibold text-xl">
+                <p className="font-semibold text-xl mb-2">
                   Location: <span className="font-medium">{item.location}</span>
                 </p>
-                <p className="font-semibold text-xl">
+                <p className="font-semibold text-xl mb-2">
                   Phone: <span className="font-medium">{item.phone}</span>
                 </p>
                 <p className="font-semibold text-xl">
-                  Date Of Session: <span className="font-medium">{item.date}</span>
+                Date And Duration: <span className="font-medium">{item.date}</span>
                 </p>
               </div>
               <div className="flex justify-end gap-6">

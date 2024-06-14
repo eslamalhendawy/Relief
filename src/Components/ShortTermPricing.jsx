@@ -37,19 +37,19 @@ const ShortTermPricing = () => {
             Short Term <span className="text-accent">Care</span>
           </h1>
           <p className="text-[#3E5C76] font-medium text-center md:text-left text-lg xl:text-xl lg:w-[83%] hidden lg:block mb-24">We know that receiving care from someone you’re familiar with is important. So, we’ll always try to connect you to the same carer when you make multiple live-in care bookings at once.</p>
-          <div className="border border-[#212529] rounded-xl lg:flex items-center justify-between hidden w-[70%] px-3 py-2 mb-6">
+          {/* <div className="border border-[#212529] rounded-xl lg:flex items-center justify-between hidden w-[70%] px-3 py-2 mb-6">
             <div className="flex items-center gap-4 ">
               <img src={card} alt="" />
               <span className="text-[#003049] font-medium text-xl capitalize">3 days</span>
             </div>
             <span className="text-[#3E5C76] font-medium text-[25px]">650 EGP</span>
-          </div>
+          </div> */}
           <div className="border border-[#212529] rounded-xl lg:flex items-center justify-between hidden w-[70%] px-3 py-2">
             <div className="flex items-center gap-4 ">
               <img src={card} alt="" />
-              <span className="text-[#003049] font-medium text-xl capitalize">per week</span>
+              <span className="text-[#003049] font-medium text-xl capitalize">per day</span>
             </div>
-            <span className="text-[#3E5C76] font-medium text-[25px]">1400 EGP</span>
+            <span className="text-[#3E5C76] font-medium text-[25px]">200 EGP</span>
           </div>
         </div>
         <div className="md:basis-1/2 flex flex-col gap-6">
@@ -64,19 +64,19 @@ const ShortTermPricing = () => {
           ))}
         </div>
         <div>
-          <div className="border border-[#212529] rounded-3xl lg:hidden items-center justify-between flex px-3 py-1 min-w-[290px] mb-6">
+          {/* <div className="border border-[#212529] rounded-3xl lg:hidden items-center justify-between flex px-3 py-1 min-w-[290px] mb-6">
             <div className="flex items-center gap-4 ">
               <img src={card} alt="" />
               <span className="text-[#003049] font-medium text-xl capitalize">3 days</span>
             </div>
             <span className="text-[#3E5C76] font-medium text-[25px]">650 EGP</span>
-          </div>
+          </div> */}
           <div className="border border-[#212529] rounded-3xl lg:hidden items-center justify-between flex px-3 py-1 min-w-[290px]">
             <div className="flex items-center gap-4 ">
               <img src={card} alt="" />
-              <span className="text-[#003049] font-medium text-xl capitalize">per week</span>
+              <span className="text-[#003049] font-medium text-xl capitalize">per day</span>
             </div>
-            <span className="text-[#3E5C76] font-medium text-[25px]">1400 EGP</span>
+            <span className="text-[#3E5C76] font-medium text-[25px]">200 EGP</span>
           </div>
         </div>
       </div>

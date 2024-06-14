@@ -20,7 +20,7 @@ const ReliefCost = () => {
             </div>
             <span className="text-[#8D99AE] text-lg">From</span>
             <p className="text-[#0096C7] font-medium text-2xl mb-6">
-              1999 EGP <span className="text-[#8D99AE] text-sm font-base">p/w</span>
+              2000 EGP <span className="text-[#8D99AE] text-sm font-base">p/w</span>
             </p>
             <p className="text-pColor text-[20px] mb-4">Full time care (also called live-in care) gives people the choice to be cared for in their own homes. Full time care includes: </p>
             <ul className="text-navyColor flex flex-col gap-4 mb-6">
@@ -53,14 +53,14 @@ const ReliefCost = () => {
               <h5 className="text-navyColor font-semibold text-3xl lg:text-4xl capitalize">short-term care</h5>
             </div>
             <div className="flex items-center gap-6">
-              <div>
-                <span className="text-[#8D99AE] text-lg">3 Days From</span>
-                <p className="text-[#0096C7] font-medium text-2xl mb-6">650 EGP</p>
-              </div>
+              {/* <div>
+                <span className="text-[#8D99AE] text-lg">7 Days From</span>
+                <p className="text-[#0096C7] font-medium text-2xl mb-6">800 EGP</p>
+              </div> */}
               <div>
                 <span className="text-[#8D99AE] text-lg">From</span>
                 <p className="text-[#0096C7] font-medium text-2xl mb-6">
-                  1400 EGP <span className="text-[#8D99AE] text-sm font-base">p/w</span>
+                  200 EGP <span className="text-[#8D99AE] text-sm font-base">p/d</span>
                 </p>
               </div>
             </div>

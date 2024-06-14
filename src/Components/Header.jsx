@@ -53,13 +53,13 @@ const Header = () => {
         </div>
         <div className="hidden lg:flex items-center gap-4">
           {userData.loggedIn ? (
-            <Link to="/profile"><img className="size-[60px] cursor-pointer" src={avatar} alt="" /></Link>
+            <Link onClick={() => setHidden(true)} to="/profile"><img className="size-[60px] cursor-pointer" src={avatar} alt="" /></Link>
           ) : (
             <>
-              <Link to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
+              <Link onClick={() => setHidden(true)} to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
                 Login
               </Link>
-              <Link to="/sign-up" className="border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] duration-200 hover:text-navyColor py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
+              <Link onClick={() => setHidden(true)} to="/sign-up" className="border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] duration-200 hover:text-navyColor py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
                 Sign Up
               </Link>
             </>

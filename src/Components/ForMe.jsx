@@ -4,6 +4,30 @@ import { useAppContext } from "../Context/AppContext";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Select from "react-select";
+
+const days = Array.from({ length: 31 }, (_, i) => ({ value: i + 1, label: i + 1 }));
+const months = Array.from({ length: 12 }, (_, i) => ({ value: i + 1, label: i + 1 }));
+const type = [
+  { value: "days", label: "Days" },
+  { value: "months", label: "Months" },
+];
+
+const customStyles = {
+  control: (provided, state) => ({
+    ...provided,
+    border: "1px solid #BBD0FF",
+    borderRadius: "12px",
+    padding: "4px 6px",
+    boxShadow: state.isFocused ? "0 0 0 2px #2868c7" : null,
+    outline: "none",
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    backgroundColor: state.isSelected ? "#2868c7" : null,
+    color: state.isSelected ? "#fff" : null,
+  }),
+};
 
 import NeedHelp from "./NeedHelp";
 
@@ -19,6 +43,10 @@ const ForMe = () => {
   const [q8, setQ8] = useState(null);
   const [q9, setQ9] = useState(null);
   const [q10, setQ10] = useState(null);
+  const [day, setDay] = useState(null);
+  const [month, setMonth] = useState(null);
+  const [hour, setHour] = useState(null);
+  const [duration, setDuration] = useState(null);
   const { userData } = useAppContext();
   const navigate = useNavigate();
 
@@ -137,7 +165,9 @@ const ForMe = () => {
               <span className="text-[#ADB5BD] font-medium text-sm md:text-base uppercase">Start arranging care</span>
               <h3 className="font-semibold mb-8 md:text-xl">Select the type of care you would like for {userData.name}</h3>
               <div className="flex flex-col gap-3 mb-12">
-                <button onClick={() => navigate("/choose-carer")} className={`text-center border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl capitalize font-medium`}>Find out and choose a caregiver</button>
+                <button onClick={() => navigate("/choose-carer")} className={`text-center border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl capitalize font-medium`}>
+                  Find out and choose a caregiver
+                </button>
                 <button onClick={() => setStage(4)} className={`text-center border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl capitalize font-medium`}>
                   share your care request
                 </button>
@@ -157,7 +187,7 @@ const ForMe = () => {
             <span className="text-[#ADB5BD] font-medium text-sm md:text-base uppercase">Care preferences</span>
             <h3 className="font-semibold mb-3 md:text-xl">Fill in {userData.name}'s preferences and share your care request.</h3>
           </div>
-          
+
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">Does {userData.name} have any preference on the gender of their carer?</h3>
             <div className="flex flex-col gap-3">
@@ -198,21 +228,29 @@ const ForMe = () => {
           </div>
 
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
-            <h3 className="font-semibold mb-3 md:text-xl">Is there WiFi at the property?</h3>
+            <h3 className="font-semibold mb-3 md:text-xl">Determine the period of service</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ8(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q8 === 1 && "bg-[#BBD0FF]"}`}>
-                Yes
-              </button>
-              <button onClick={() => setQ8(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q8 === 2 && "bg-[#BBD0FF]"}`}>
-                No
-              </button>
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <input type="text" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl block w-full" placeholder="Enter Number Of Days Or Months" />
+                <Select className="basis-1/2" onChange={(e) => setDuration(e.value)} styles={customStyles} options={type} placeholder="Select" />
+              </div>
+            </div>
+          </div>
+          <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
+            <h3 className="font-semibold mb-3 md:text-xl">Appointment Date</h3>
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col md:flex-row md:items-center gap-4">
+                <Select className="basis-1/3" onChange={(e) => setDay(e.value)} styles={customStyles} options={days} placeholder="Select Day" />
+                <Select className="basis-1/3" onChange={(e) => setMonth(e.value)} styles={customStyles} options={months} placeholder="Select Month" />
+                <input type="text" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl" placeholder="HH:MM"  />
+              </div>
             </div>
           </div>
 
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">What is the full address of {userData.name}'s home?</h3>
             <div className="flex flex-col gap-3">
-            <input onChange={(e) => setQ9(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder={`Enter ${userData.name}'s Location`} />
+              <input onChange={(e) => setQ9(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder={`Enter ${userData.name}'s Location`} />
             </div>
           </div>
 
@@ -220,7 +258,7 @@ const ForMe = () => {
             <h3 className="font-semibold mb-3 md:text-xl">Please click to confirm the following:</h3>
             <div className="flex flex-col gap-3">
               <button onClick={() => setQ10(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q10 === 1 && "bg-[#BBD0FF]"}`}>
-              No cameras are located in the carer's sleeping area or private spaces like bathrooms
+                No cameras are located in the carer's sleeping area or private spaces like bathrooms
               </button>
             </div>
           </div>

@@ -27,6 +27,7 @@ import CarerSchedule from "./Components/CarerSchedule";
 import CarerNotifactions from "./Components/CarerNotifactions";
 import ChooseCarer from "./Components/ChooseCarer";
 import CarerProfile from "./Components/CarerProfile";
+import CarerRatings from "./Components/CarerRatings";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
@@ -82,6 +83,7 @@ function App() {
           <Route path="/carer-notifications" element={<CarerNotifactions />} />
           <Route path="/choose-carer" element={<ChooseCarer />} />
           <Route path="/carer-profile/:id" element={<CarerProfile />} />
+          <Route path="/carer-ratings" element={<CarerRatings />} />
         </Routes>
       </Router>
       <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
