@@ -75,7 +75,7 @@ const CarerProfile = () => {
 
   return (
     <section className="container mx-auto px-4 py-16">
-      <NeedHelp />
+      {/* <NeedHelp /> */}
       <div className="flex flex-col md:flex-row items-start gap-12 lg:gap-16">
         <div className="bg-[#F6F3EF] basis-1/3 p-6 rounded-xl">
           <div className="size-[120px] rounded-full mx-auto mb-2">

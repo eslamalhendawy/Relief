@@ -6,6 +6,7 @@ import ReliefCost from "./ReliefCost";
 import CareBenefits from "./CareBenefits";
 import CareFeature from "./CareFeature";
 import Expert from "./Expert";
+import Footer from "./Footer";
 
 const Pricing = () => {
 
@@ -22,6 +23,7 @@ const Pricing = () => {
       <CareBenefits />
       <CareFeature />
       <Expert />
+      <Footer />
     </>
   )
 }

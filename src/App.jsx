@@ -83,7 +83,6 @@ function App() {
           <Route path="/choose-carer" element={<ChooseCarer />} />
           <Route path="/carer-profile/:id" element={<CarerProfile />} />
         </Routes>
-        <Footer />
       </Router>
       <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
     </>

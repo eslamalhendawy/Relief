@@ -8,6 +8,7 @@ import heroImage from "/assets/hero.png";
 import about1 from "/assets/aboutUs1.png";
 import about2 from "/assets/aboutUs2.png";
 import about3 from "/assets/aboutUs3.png";
+import Footer from "./Footer";
 
 const AboutUs = () => {
   const { userData } = useAppContext();
@@ -62,6 +63,7 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

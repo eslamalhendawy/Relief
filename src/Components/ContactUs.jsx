@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import Footer from "./Footer";
+
 import heroImage from "/assets/hero.png";
 import phone from "/assets/phone.png";
 
@@ -10,7 +12,8 @@ const ContactUs = () => {
   }, []);
 
   return (
-    <section className="container mx-auto px-4 py-12 flex gap-6 xl:gap-12 flex-col md:flex-row items-center">
+    <>
+      <section className="container mx-auto px-4 py-12 flex gap-6 xl:gap-12 flex-col md:flex-row items-center">
       <div className="md:basis-1/2">
         <h1 className="text-navyColor font-[600] text-4xl md:text-6xl xl:text-[90px] text-center md:text-left mb-8 capitalize">
           <span className="text-accent">Get</span> in touch
@@ -28,6 +31,8 @@ const ContactUs = () => {
         <img src={heroImage} alt="" />
       </div>
     </section>
+    <Footer />
+    </>
   );
 };
 

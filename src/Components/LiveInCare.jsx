@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useAppContext } from "../Context/AppContext";
 import { Link } from "react-router-dom";
 
+import Footer from "./Footer";
 import CareHero from "./CareHero";
 import CareNavigation from "./CareNavigation";
 import Overview from "./Overview";
@@ -31,6 +32,7 @@ const LiveInCare = () => {
       <CareBenefits />
       <LiveInPricing />
       <CallAdvisor />
+      <Footer />
     </>
   );
 };

@@ -44,7 +44,7 @@ const ForMe = () => {
 
   return (
     <section className="container mx-auto px-4 py-16">
-      <NeedHelp />
+      {/* <NeedHelp /> */}
       {stage === 1 && (
         <div className="border border-[#BBD0FF] md:w-[80%] lg:w-[70%] md:mx-auto p-3 md:p-6 rounded-xl">
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">

@@ -32,7 +32,7 @@ const ChooseCarer = () => {
   ];
   return (
     <section className="container mx-auto px-4 py-16">
-      <NeedHelp />
+      {/* <NeedHelp /> */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="online-indicator" />
@@ -43,7 +43,7 @@ const ChooseCarer = () => {
             <span>Filter</span>
             <i className="fa-solid fa-filter"></i>
           </button>
-          <ul className={`absolute bg-white border bottom-[-90px] left-0 w-[200px] text-center text-[#212529] font-semibold ${hidden && "hidden"}`}>
+          <ul className={`absolute bg-white border bottom-[-90px] right-0 w-[200px] text-center text-[#212529] font-semibold ${hidden && "hidden"}`}>
             <li onClick={() => setHidden(true)} className="py-2 cursor-pointer border-b-2 hover:bg-[#f6f3ef] duration-200">
               Care Giver Nearest To You
             </li>

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+import Footer from "./Footer";
 import Hero from "./Hero";
 import Features from "./Features";
 import CareSection from "./CareSection";
@@ -15,7 +16,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <>
+    <> 
       <Hero />
       <Features />
       <CareSection />
@@ -23,6 +24,7 @@ const HomePage = () => {
       <Recommendations />
       <HowItWorks showP={true} />
       <Benefits />
+      <Footer />
     </>
   );
 };
