@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
@@ -30,10 +30,39 @@ const BookAppointmentModel = () => {
   const [open, setOpen] = useState(false);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
+  const [time, setTime] = useState(null);
   const [hour, setHour] = useState(null);
-  const [period, setPeriod] = useState(null);
+  const [minutes, setMinutes] = useState(null);
   const [duration, setDuration] = useState(null);
-  const [amPM, setAmPM] = useState("");
+
+  const input1 = useRef(null);
+  const input2 = useRef(null);
+
+  const hourHandler = (e) => {
+    if (e.target.value.length == 2) {
+      input1.current.nextSibling.focus();
+      setHour(e.target.value);
+    }
+  };
+
+  const minutesHandler = (e) => {
+    if (e.target.value.length == 0) {
+      input2.current.previousSibling.focus();
+      setMinutes(e.target.value);
+    }
+    if (e.target.value.length > 2) {
+      input2.current.value = input2.current.value.slice(0, 2);
+      setMinutes(e.target.value);
+    }
+    if (e.target.value.length == 2) {
+      setMinutes(e.target.value);
+    }
+  };
+
+  useEffect(() => {
+    setTime(`${hour}:${minutes}`);
+  }, [hour, minutes]);
+
   return (
     <>
       <button onClick={() => setOpen(true)} className="bg-accent hover:bg-red-700 duration-200 text-white w-[60%] py-2 block mx-auto font-semibold rounded-2xl">
@@ -43,7 +72,9 @@ const BookAppointmentModel = () => {
         <div className="flex justify-center items-center min-h-screen">
           <div className="bg-white p-6 sm:p-12 rounded-xl w-[300px] sm:w-[450px] md:w-[550px]">
             <div className={`flex items-center justify-end mb-6`}>
-              <i className="fa-solid fa-x text-lg text-[#a3aab5] hover:text-black duration-300 cursor-pointer" onClick={() => setOpen(false)}></i>
+              <button onClick={() => setOpen(false)}>
+                <i className="fa-solid fa-x text-lg text-[#a3aab5] hover:text-black duration-300 cursor-pointer"></i>
+              </button>
             </div>
             <div className="mb-6">
               <h3 className="text-2xl font-semibold mb-4 text-[#212529]">Day</h3>
@@ -55,14 +86,9 @@ const BookAppointmentModel = () => {
             </div>
             <div className="mb-6">
               <h3 className="text-2xl font-semibold mb-4 text-[#212529]">Hour</h3>
-              <input onChange={(e) => setHour(e.target.value)} type="text" placeholder="HH : MM" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl block w-full mb-4" />
-              <div className="flex items-center gap-4 mb-4">
-                <button onClick={() => setAmPM("am")} className={` hover:bg-[#BBD0FF] duration-200 size-[45px] flex justify-center items-center rounded-full text-[#00B4D8] font-semibold text-xl ${amPM === "am" ? "bg-[#BBD0FF]" : "bg-[#BBD0FF33]"}`}>
-                  <span>AM</span>
-                </button>
-                <button onClick={() => setAmPM("pm")} className={` hover:bg-[#BBD0FF] duration-200 size-[45px] flex justify-center items-center rounded-full text-[#00B4D8] font-semibold text-xl ${amPM === "pm" ? "bg-[#BBD0FF]" : "bg-[#BBD0FF33]"}`}>
-                  <span>PM</span>
-                </button>
+              <div className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl mb-4 flex gap-1">
+                <input onChange={hourHandler} className="outline-none focus:placeholder:opacity-0 placeholder:duration-200 w-[35px]" placeholder="HH :" type="number" ref={input1} />
+                <input ref={input2} onChange={minutesHandler} className="outline-none focus:placeholder:opacity-0 placeholder:duration-200 w-[30px]" placeholder="MM" type="number" />
               </div>
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold mb-4 text-[#212529] capitalize ">Determine the period of service</h3>
@@ -72,7 +98,9 @@ const BookAppointmentModel = () => {
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="bg-accent hover:bg-red-700 duration-200 text-white px-16 py-2 font-semibold rounded-2xl">Submit</button>
+                <button className="bg-accent hover:bg-red-700 duration-200 text-white px-16 py-2 font-semibold rounded-2xl">
+                  Submit
+                </button>
               </div>
             </div>
           </div>

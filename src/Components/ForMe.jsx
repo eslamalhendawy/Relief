@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../Context/AppContext";
 
@@ -29,8 +29,6 @@ const customStyles = {
   }),
 };
 
-import NeedHelp from "./NeedHelp";
-
 const ForMe = () => {
   const [stage, setStage] = useState(1);
   const [q1, setQ1] = useState(null);
@@ -45,10 +43,36 @@ const ForMe = () => {
   const [q10, setQ10] = useState(null);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
+  const [time, setTime] = useState(null);
   const [hour, setHour] = useState(null);
+  const [minutes, setMinutes] = useState(null);
   const [duration, setDuration] = useState(null);
   const { userData } = useAppContext();
   const navigate = useNavigate();
+
+  const input1 = useRef(null);
+  const input2 = useRef(null);
+
+  const hourHandler = (e) => {
+    if (e.target.value.length == 2) {
+      input1.current.nextSibling.focus();
+      setHour(e.target.value);
+    }
+  };
+
+  const minutesHandler = (e) => {
+    if (e.target.value.length == 0) {
+      input2.current.previousSibling.focus();
+      setMinutes(e.target.value);
+    }
+    if (e.target.value.length > 2) {
+      input2.current.value = input2.current.value.slice(0, 2);
+      setMinutes(e.target.value);
+    }
+    if (e.target.value.length == 2) {
+      setMinutes(e.target.value);
+    }
+  };
 
   useEffect(() => {
     document.title = "Relief | Care For Me";
@@ -72,7 +96,6 @@ const ForMe = () => {
 
   return (
     <section className="container mx-auto px-4 py-16">
-      {/* <NeedHelp /> */}
       {stage === 1 && (
         <div className="border border-[#BBD0FF] md:w-[80%] lg:w-[70%] md:mx-auto p-3 md:p-6 rounded-xl">
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
@@ -242,13 +265,16 @@ const ForMe = () => {
               <div className="flex flex-col md:flex-row md:items-center gap-4">
                 <Select className="basis-1/3" onChange={(e) => setDay(e.value)} styles={customStyles} options={days} placeholder="Select Day" />
                 <Select className="basis-1/3" onChange={(e) => setMonth(e.value)} styles={customStyles} options={months} placeholder="Select Month" />
-                <input type="text" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl" placeholder="HH:MM"  />
+                <div className="basis-1/3 outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl flex gap-1">
+                  <input onChange={hourHandler} className="outline-none focus:placeholder:opacity-0 placeholder:duration-200 w-[35px]" placeholder="HH :" type="number" ref={input1} />
+                  <input ref={input2} onChange={minutesHandler} className="outline-none focus:placeholder:opacity-0 placeholder:duration-200 w-[30px]" placeholder="MM" type="number" />
+                </div>
               </div>
             </div>
           </div>
 
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
-            <h3 className="font-semibold mb-3 md:text-xl">What is the full address of {userData.name}'s home?</h3>
+            <h3 className="font-semibold mb-3 md:text-xl">What is the full address of {userData.name}&apos;s home?</h3>
             <div className="flex flex-col gap-3">
               <input onChange={(e) => setQ9(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder={`Enter ${userData.name}'s Location`} />
             </div>
@@ -258,7 +284,7 @@ const ForMe = () => {
             <h3 className="font-semibold mb-3 md:text-xl">Please click to confirm the following:</h3>
             <div className="flex flex-col gap-3">
               <button onClick={() => setQ10(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q10 === 1 && "bg-[#BBD0FF]"}`}>
-                No cameras are located in the carer's sleeping area or private spaces like bathrooms
+                No cameras are located in the carer&apos;s sleeping area or private spaces like bathrooms
               </button>
             </div>
           </div>

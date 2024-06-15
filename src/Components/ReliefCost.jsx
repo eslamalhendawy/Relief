@@ -20,7 +20,7 @@ const ReliefCost = () => {
             </div>
             <span className="text-[#8D99AE] text-lg">From</span>
             <p className="text-[#0096C7] font-medium text-2xl mb-6">
-              2000 EGP <span className="text-[#8D99AE] text-sm font-base">p/w</span>
+              2000 EGP <span className="text-[#8D99AE] text-sm font-base">p/m</span>
             </p>
             <p className="text-pColor text-[20px] mb-4">Full time care (also called live-in care) gives people the choice to be cared for in their own homes. Full time care includes: </p>
             <ul className="text-navyColor flex flex-col gap-4 mb-6">
