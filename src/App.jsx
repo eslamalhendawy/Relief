@@ -28,6 +28,7 @@ import CarerNotifactions from "./Components/CarerNotifactions";
 import ChooseCarer from "./Components/ChooseCarer";
 import CarerProfile from "./Components/CarerProfile";
 import CarerRatings from "./Components/CarerRatings";
+import CarerLogin from "./Components/CarerLogin";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("userToken"));
@@ -71,6 +72,7 @@ function App() {
           <Route path="/short-term-care" element={<ShortTermCare />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/carer-login" element={<CarerLogin />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/speak-to-expert" element={<SpeakToExpert />} />
           <Route path="/get-started" element={<GetStarted />} />
