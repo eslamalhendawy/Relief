@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import { postData } from "../Services/apiCalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -13,12 +14,14 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [re_password, setRePassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [long, setLong] = useState("");
-  const [lat, setLat] = useState("");
+  const [longitude, setLong] = useState("");
+  const [latitude, setLat] = useState("");
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [healthRecords, setHealthRecords] = useState("");
+  const [tempDate, setTempDate] = useState("");
+  const [healthRecordText, setHealthRecords] = useState("");
   const [hidden, setHidden] = useState(true);
   const { setUserData } = useAppContext();
   const navigate = useNavigate();
@@ -31,8 +34,8 @@ const SignUp = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleNext = async () => {
-    if (username === "" || email === "" || password === "" || phone === "" || long === "" || lat === "") {
+  const handleNext = () => {
+    if (username === "" || email === "" || password === "" || re_password === "" || phone === "" || longitude === "" || latitude === "") {
       return toast.error("Please fill all the fields");
     }
     if (!email.match(regEmail)) {
@@ -41,28 +44,30 @@ const SignUp = () => {
     if (password.length < 8) {
       return toast.error("Password must be at least 8 characters long");
     }
+    if (password !== re_password) {
+      return toast.error("Passwords do not match");
+    }
     if (!phone.match(regNumbers) || phone.length !== 11) {
       return toast.error("Please enter a valid phone number");
     }
     setStage(2);
   };
 
+  useEffect(() => {
+    const date = new Date(tempDate);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    setDateOfBirth(`${year}/${month}/${day}`);
+  }, [tempDate]);
+
   const handleSignup = async () => {
-    if(gender === "" || dateOfBirth === "" || healthRecords === ""){
+    if (gender === "" || tempDate === "" || healthRecordText === "") {
       return toast.error("Please fill all the fields");
     }
     toast.info("Creating account...");
-    setUserData({
-      name: "John Doe",
-      email: "test@test.com",
-      phone: "01012609957",
-      address: "123, Random Street",
-      avatar: "random",
-      role: "elder",
-      loggedIn: true,
-    });
-    localStorage.setItem("userToken", "123");
-    navigate("/");
+    const response = await postData("patient/signup", {username, email, dateOfBirth, password, re_password, phone, healthRecordText, gender, latitude, longitude});
+    console.log(response);
   };
 
   const handleLocation = () => {
@@ -107,6 +112,17 @@ const SignUp = () => {
               </div>
             </div>
             <div className="flex flex-col gap-2 mb-4">
+              <label htmlFor="rePassword" className="font-semibold text-[22px]">
+                Confirm Password
+              </label>
+              <div className="relative">
+                <input onChange={(e) => setRePassword(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:border-[#00B4D8] focus:placeholder:opacity-0 placeholder:duration-200 duration-200 px-2 py-1 text-lg rounded-xl w-full" type={hidden ? "password" : "text"} id="rePassword" placeholder="Confirm your password" />
+                <button onClick={() => setHidden(!hidden)} className="absolute right-2 top-[50%] translate-y-[-50%] text-[#ADB5BD] hover:text-black duration-300">
+                  <i className={`fa-solid  text-lg ${hidden ? "fa-eye" : "fa-eye-slash"}`}></i>
+                </button>
+              </div>
+            </div>
+            <div className="flex flex-col gap-2 mb-4">
               <label htmlFor="phone" className="font-semibold text-[22px]">
                 Phone Number
               </label>
@@ -121,8 +137,8 @@ const SignUp = () => {
               </label>
               <div className="relative">
                 {/* <input onChange={(e) => setLocation(e.target.value)} className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder="Enter your location" /> */}
-                <button onClick={handleLocation} className={`w-full text-left outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl ${long !== "" && "bg-[#BBD0FF]"}`}>
-                  {lat === "" || long === "" ? "Enter your location" : "Location Saved"}
+                <button onClick={handleLocation} className={`w-full text-left outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl ${longitude !== "" && "bg-[#BBD0FF]"}`}>
+                  {latitude === "" || longitude === "" ? "Enter your location" : "Location Saved"}
                 </button>
                 <img src={flag} className="absolute text-[#6C757D] left-1 top-[50%] translate-y-[-50%] border-r border-[#6C757D] pr-1" />
               </div>
@@ -159,10 +175,10 @@ const SignUp = () => {
             </div>
             <div className="mb-8">
               <h3 className="font-semibold mb-3 md:text-xl capitalize">date of birth</h3>
-              <input onChange={(e) => setDateOfBirth(e.target.value)} type="date" className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-4 py-1 text-lg rounded-xl" />
+              <input onChange={(e) => setTempDate(e.target.value)} type="date" className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-4 py-1 text-lg rounded-xl" />
             </div>
             <div className="mb-8">
-              <h3 className="font-semibold mb-3 md:text-xl capitalize">date of birth</h3>
+              <h3 className="font-semibold mb-3 md:text-xl capitalize">health record</h3>
               <textarea onChange={(e) => setHealthRecords(e.target.value)} placeholder="Enter the health record and any important information..." className="w-full h-[200px] resize-none outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-4 py-2 text-lg rounded-xl"></textarea>
             </div>
             <div className="h-[px] w-[50%] mx-auto bg-[#6C757D] mb-4" />

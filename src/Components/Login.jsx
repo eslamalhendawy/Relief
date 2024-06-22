@@ -29,17 +29,9 @@ const Login = () => {
       return toast.error("Please enter a valid email address");
     }
     toast.info("Logging in...");
-    setUserData({
-      name: "John Doe",
-      email: "test@test.com",
-      phone: "01012609957",
-      address: "123, Random Street",
-      avatar: "random",
-      role: "elder",
-      loggedIn: true,
-    });
-    localStorage.setItem("userToken", "123");
-    navigate("/");
+    console.log(email, password);
+    const response = await postData("patient/signin", { email, password });
+    console.log(response);
   }
 
   return (

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAppContext } from "../Context/AppContext";
 import { Link, useNavigate } from "react-router-dom";
+import { postData } from "../Services/apiCalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,20 +11,21 @@ import flag from "/assets/egypt.png";
 
 const CarerSignUp = () => {
   const [stage, setStage] = useState(1);
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [re_password, setPasswordConfirm] = useState("");
   const [phone, setPhone] = useState("");
-  const [long, setLong] = useState("");
-  const [lat, setLat] = useState("");
-  const [bio, setBio] = useState("");
+  const [longitude, setLong] = useState("");
+  const [latitude, setLat] = useState("");
+  const [biography, setBio] = useState("");
   const [hidden, setHidden] = useState(true);
   const [hidden2, setHidden2] = useState(true);
   const [gender, setGender] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
-  const [smoker, setSmoker] = useState(null);
-  const [driver, setDriver] = useState(null);
+  const [tempDate, setTempDate] = useState("");
+  const [doYouSmoke, setSmoker] = useState(null);
+  const [canYouDrive, setDriver] = useState(null);
   const { setUserData } = useAppContext();
   const navigate = useNavigate();
 
@@ -35,8 +37,8 @@ const CarerSignUp = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleClick = async () => {
-    if (username === "" || email === "" || password === "" || passwordConfirm === "" || phone === "" || long === "" || lat === "" || bio === "") {
+  const handleClick = () => {
+    if (userName === "" || email === "" || password === "" || re_password === "" || phone === "" || longitude === "" || latitude === "" || biography === "") {
       return toast.error("Please fill all the fields");
     }
     if (!email.match(regEmail)) {
@@ -45,7 +47,7 @@ const CarerSignUp = () => {
     if (password.length < 8) {
       return toast.error("Password must be at least 8 characters long");
     }
-    if (password !== passwordConfirm) {
+    if (password !== re_password) {
       return toast.error("Passwords do not match");
     }
     if (!phone.match(regNumbers) || phone.length !== 11) {
@@ -54,23 +56,23 @@ const CarerSignUp = () => {
     setStage(2);
   };
 
+  useEffect(() => {
+    const date = new Date(tempDate);
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+    setDateOfBirth(`${year}/${month}/${day}`);
+  }, [tempDate]);
+
   const handleSignup = async () => {
-    if (gender === "" || dateOfBirth === "" || smoker === null || driver === null) {
+    if (gender === "" || tempDate === "" || doYouSmoke === null || canYouDrive === null) {
       return toast.error("Please fill all the fields");
     }
+    console.log(userName, email, password, re_password, gender, dateOfBirth, phone, doYouSmoke, canYouDrive, longitude, latitude, biography);
+    const response = await postData("caregiver/signup", {userName, email, password, re_password, gender, dateOfBirth, phone, doYouSmoke, canYouDrive, longitude, latitude, biography});
+    console.log(response);
     toast.info("Creating account...");
-    setUserData({
-      name: "John Doe",
-      email: "test@test.com",
-      phone: "01012609957",
-      address: "123, Random Street",
-      avatar: "random",
-      role: "carer",
-      bio: "Test Carer Biography",
-      loggedIn: true,
-    });
-    localStorage.setItem("userToken", "123");
-    navigate("/");
+    console.log();
   };
 
   const handleLocation = () => {
@@ -114,11 +116,11 @@ const CarerSignUp = () => {
               </div>
             </div>
             <div className="flex flex-col gap-2 mb-4">
-              <label htmlFor="password" className="font-semibold text-[22px]">
+              <label htmlFor="confirmPassword" className="font-semibold text-[22px]">
                 Confirm Password
               </label>
               <div className="relative">
-                <input onChange={(e) => setPasswordConfirm(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:border-[#00B4D8] focus:placeholder:opacity-0 placeholder:duration-200 duration-200 px-2 py-1 text-lg rounded-xl w-full" type={hidden2 ? "password" : "text"} id="password" placeholder="Enter your password" />
+                <input onChange={(e) => setPasswordConfirm(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:border-[#00B4D8] focus:placeholder:opacity-0 placeholder:duration-200 duration-200 px-2 py-1 text-lg rounded-xl w-full" type={hidden2 ? "password" : "text"} id="confirmPassword" placeholder="Enter your password" />
                 <button onClick={() => setHidden2(!hidden2)} className="absolute right-2 top-[50%] translate-y-[-50%] text-[#ADB5BD] hover:text-black duration-300">
                   <i className={`fa-solid  text-lg ${hidden2 ? "fa-eye" : "fa-eye-slash"}`}></i>
                 </button>
@@ -139,8 +141,8 @@ const CarerSignUp = () => {
               </label>
               <div className="relative mb-4">
                 {/* <input onChange={(e) => setLocation(e.target.value)} className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder="Enter your location" /> */}
-                <button onClick={handleLocation} className={`w-full text-left outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl ${long !== "" && "bg-[#BBD0FF]"}`}>
-                  {lat === "" || long === "" ? "Enter your location" : "Location Saved"}
+                <button onClick={handleLocation} className={`w-full text-left outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 pl-[38px] pr-2 py-1 text-lg rounded-xl ${longitude !== "" && "bg-[#BBD0FF]"}`}>
+                  {latitude === "" || longitude === "" ? "Enter your location" : "Location Saved"}
                 </button>
                 <img src={flag} className="absolute text-[#6C757D] left-1 top-[50%] translate-y-[-50%] border-r border-[#6C757D] pr-1" />
               </div>
@@ -183,15 +185,15 @@ const CarerSignUp = () => {
             </div>
             <div className="mb-8">
               <h3 className="font-semibold mb-3 md:text-xl capitalize">date of birth</h3>
-              <input onChange={(e) => setDateOfBirth(e.target.value)} type="date" className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-4 py-1 text-lg rounded-xl" />
+              <input onChange={(e) => setTempDate(e.target.value)} type="date" className="w-full outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-4 py-1 text-lg rounded-xl" />
             </div>
             <div className="mb-8">
               <h3 className="font-semibold mb-3 md:text-xl capitalize">Do you smoke ?</h3>
               <div className="flex gap-6">
-                <button onClick={() => setSmoker(true)} className={`text-center border w-[50%] border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${smoker === true && "bg-[#BBD0FF]"}`}>
+                <button onClick={() => setSmoker("yes")} className={`text-center border w-[50%] border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${doYouSmoke === "yes" && "bg-[#BBD0FF]"}`}>
                   Yes
                 </button>
-                <button onClick={() => setSmoker(false)} className={`text-center border w-[50%]  border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${smoker === false && "bg-[#BBD0FF]"}`}>
+                <button onClick={() => setSmoker("no")} className={`text-center border w-[50%]  border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${doYouSmoke === "no" && "bg-[#BBD0FF]"}`}>
                   No
                 </button>
               </div>
@@ -199,10 +201,10 @@ const CarerSignUp = () => {
             <div className="mb-8">
               <h3 className="font-semibold mb-3 md:text-xl capitalize">Can You drive ?</h3>
               <div className="flex gap-6">
-                <button onClick={() => setDriver(true)} className={`text-center border w-[50%] border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${driver === true && "bg-[#BBD0FF]"}`}>
+                <button onClick={() => setDriver("yes")} className={`text-center border w-[50%] border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${canYouDrive === "yes" && "bg-[#BBD0FF]"}`}>
                   Yes
                 </button>
-                <button onClick={() => setDriver(false)} className={`text-center border w-[50%]  border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${driver === false && "bg-[#BBD0FF]"}`}>
+                <button onClick={() => setDriver(false)} className={`text-center border w-[50%]  border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${canYouDrive === "no" && "bg-[#BBD0FF]"}`}>
                   No
                 </button>
               </div>
