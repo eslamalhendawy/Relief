@@ -26,11 +26,12 @@ const CarerSignUp = () => {
   const [tempDate, setTempDate] = useState("");
   const [doYouSmoke, setSmoker] = useState(null);
   const [canYouDrive, setDriver] = useState(null);
-  const { setUserData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   const navigate = useNavigate();
 
   const regNumbers = /^[0-9]+$/;
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+  const regPassword = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*]).+$/;
 
   useEffect(() => {
     document.title = "Relief | Sign Up";
@@ -46,6 +47,9 @@ const CarerSignUp = () => {
     }
     if (password.length < 8) {
       return toast.error("Password must be at least 8 characters long");
+    }
+    if (!password.match(regPassword)) {
+      return toast.error("Password must contain at least one letter, one number and one special character");
     }
     if (password !== re_password) {
       return toast.error("Passwords do not match");
@@ -68,10 +72,15 @@ const CarerSignUp = () => {
     if (gender === "" || tempDate === "" || doYouSmoke === null || canYouDrive === null) {
       return toast.error("Please fill all the fields");
     }
-    console.log(userName, email, password, re_password, gender, dateOfBirth, phone, doYouSmoke, canYouDrive, longitude, latitude, biography);
-    const response = await postData("caregiver/signup", {userName, email, password, re_password, gender, dateOfBirth, phone, doYouSmoke, canYouDrive, longitude, latitude, biography});
-    console.log(response);
+    const response = await postData("caregiver/signup", { userName, email, password, re_password, gender, dateOfBirth, phone, doYouSmoke, canYouDrive, longitude, latitude, biography });
     toast.info("Creating account...");
+    if (response.token) {
+      navigate("/");
+      toast.success("Account created successfully");
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("role", "carer");
+      setUserData({ ...userData, loggedIn: true });
+    }
     console.log();
   };
 

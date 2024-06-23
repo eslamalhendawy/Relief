@@ -27,7 +27,7 @@ const Profile = () => {
 
   const handleLogout = () => {
     setUserData({ loggedIn: false });
-    localStorage.removeItem("userToken");
+    localStorage.clear();
     navigate("/");
   };
 

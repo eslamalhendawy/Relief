@@ -11,8 +11,8 @@ import image from "/assets/loginImage.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [hidden, setHidden] = useState(true);
-  const { setUserData } = useAppContext();
+  const [ hidden, setHidden] = useState(true);
+  const { userData, setUserData } = useAppContext();
   const navigate = useNavigate();
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -29,9 +29,14 @@ const Login = () => {
       return toast.error("Please enter a valid email address");
     }
     toast.info("Logging in...");
-    console.log(email, password);
     const response = await postData("patient/signin", { email, password });
-    console.log(response);
+    if(response.token){
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("role", "patient");
+      setUserData({...userData, loggedIn : true});
+      toast.success("Logged in successfully");
+      navigate("/");
+    }
   }
 
   return (

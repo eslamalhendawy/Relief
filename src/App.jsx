@@ -31,7 +31,7 @@ import CarerRatings from "./Components/CarerRatings";
 import CarerLogin from "./Components/CarerLogin";
 
 function App() {
-  const loggedIn = Boolean(localStorage.getItem("userToken"));
+  const loggedIn = Boolean(localStorage.getItem("token"));
   const { setUserData } = useAppContext();
 
   useEffect(() => {

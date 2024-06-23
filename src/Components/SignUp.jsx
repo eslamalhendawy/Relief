@@ -11,7 +11,7 @@ import flag from "/assets/egypt.png";
 
 const SignUp = () => {
   const [stage, setStage] = useState(1);
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [re_password, setRePassword] = useState("");
@@ -23,11 +23,12 @@ const SignUp = () => {
   const [tempDate, setTempDate] = useState("");
   const [healthRecordText, setHealthRecords] = useState("");
   const [hidden, setHidden] = useState(true);
-  const { setUserData } = useAppContext();
+  const { userData, setUserData } = useAppContext();
   const navigate = useNavigate();
 
   const regNumbers = /^[0-9]+$/;
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+  const regPassword = /^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#$%^&*]).+$/;
 
   useEffect(() => {
     document.title = "Relief | Sign Up";
@@ -35,7 +36,7 @@ const SignUp = () => {
   }, []);
 
   const handleNext = () => {
-    if (username === "" || email === "" || password === "" || re_password === "" || phone === "" || longitude === "" || latitude === "") {
+    if (userName === "" || email === "" || password === "" || re_password === "" || phone === "" || longitude === "" || latitude === "") {
       return toast.error("Please fill all the fields");
     }
     if (!email.match(regEmail)) {
@@ -43,6 +44,9 @@ const SignUp = () => {
     }
     if (password.length < 8) {
       return toast.error("Password must be at least 8 characters long");
+    }
+    if (!password.match(regPassword)) {
+      return toast.error("Password must contain at least one letter, one number and one special character");
     }
     if (password !== re_password) {
       return toast.error("Passwords do not match");
@@ -66,8 +70,14 @@ const SignUp = () => {
       return toast.error("Please fill all the fields");
     }
     toast.info("Creating account...");
-    const response = await postData("patient/signup", {username, email, dateOfBirth, password, re_password, phone, healthRecordText, gender, latitude, longitude});
-    console.log(response);
+    const response = await postData("patient/signup", {userName , email, dateOfBirth, password, re_password, phone, healthRecordText, gender, latitude, longitude});
+    if(response){
+      navigate("/");
+      toast.success("Account created successfully");
+      localStorage.setItem("token", response.token);
+      localStorage.setItem("role", "patient");
+      setUserData({...userData, loggedIn : true});
+    }
   };
 
   const handleLocation = () => {
