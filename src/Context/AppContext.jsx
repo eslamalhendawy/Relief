@@ -9,6 +9,14 @@ export const AppProvider = ({ children }) => {
     phone: "",
     address: "",
     avatar: "",
+    bio: "",
+    healthRecord: {},
+    canYouDrive: false,
+    doYouSmoke: false,
+    long: "",
+    lat: "",
+    dateOfBirth: "",
+    role: "",
     loggedIn: false,
   });
   return <AppContext.Provider value={{ userData, setUserData }}>{children}</AppContext.Provider>;

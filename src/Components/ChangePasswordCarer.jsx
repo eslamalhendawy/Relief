@@ -7,7 +7,7 @@ import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ChangePassword = () => {
+const ChangePasswordCarer = () => {
   const [open, setOpen] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -28,7 +28,7 @@ const ChangePassword = () => {
       return;
     }
     toast.info("Changing Password...");
-    const response = await putData("patient/changePassword", { currentPassword, newPassword, confirmPassword }, localStorage.getItem("token"));
+    const response = await putData("caregiver/changePassword", { currentPassword, newPassword, confirmPassword }, localStorage.getItem("token"));
     if(response.message === "Password changed successfully"){
       toast.success("Password Changed Successfully");
       setOpen(false);
@@ -68,7 +68,7 @@ const ChangePassword = () => {
         </div>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default ChangePassword;
+export default ChangePasswordCarer

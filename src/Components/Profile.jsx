@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UpdatePFPModal from "./UpdatePFPModal";
 import PaymentModal from "./PaymentModal";
 import ChangePassword from "./ChangePassword";
+import ChangePasswordCarer from "./ChangePasswordCarer";
 import CarerProfileHeader from "./CarerProfileHeader";
 
 import avatar from "/assets/randomUser.png";
@@ -44,7 +45,7 @@ const Profile = () => {
             <div>
               <h1 className="text-xl font-semibold">{userData.name}</h1>
               {userData.role === "carer" ? <p className="text-[#8D99AE] text-lg">{userData.bio}</p> : <p className="text-[#8D99AE] text-lg">{userData.address}</p>}
-              <ChangePassword />
+              {userData.role === "patient" ? <ChangePassword /> : <ChangePasswordCarer />}
             </div>
           </div>
           <div>
@@ -72,7 +73,7 @@ const Profile = () => {
           <div className="mb-4">
             <h3 className="font-semibold mb-3 md:text-xl">Biography</h3>
             <div className="flex relative">
-              <input disabled={editBio} className={`outline-none border grow border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl ${!editBio && "placeholder:text-black"}`} type="text" id="username" placeholder={userData.bio} />
+              <input disabled={editBio} className={`outline-none border grow border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl ${!editBio && "placeholder:text-black"}`} type="text" id="bio" placeholder={userData.bio} />
               <button onClick={() => setEditBio(!editBio)} className="absolute right-2 top-[50%] translate-y-[-50%] group">
                 <i className="fa-regular fa-pen-to-square text-lg group-hover:text-[#00B4D8] duration-200"></i>
               </button>

@@ -40,7 +40,7 @@ export const putData = async (url, data, token) => {
   await axios
     .put(baseURL + url, data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       },
     })
     .then((response) => {

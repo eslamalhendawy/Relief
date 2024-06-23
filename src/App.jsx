@@ -32,31 +32,53 @@ import CarerLogin from "./Components/CarerLogin";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
   const { setUserData } = useAppContext();
 
   useEffect(() => {
     if (loggedIn) {
-      const token = localStorage.getItem("userToken");
-      setUserData({
-        name: "John Doe",
-        email: "test@test.com",
-        phone: "01012609957",
-        address: "123, Random Street",
-        avatar: "random",
-        loggedIn: true,
-      });
-      // getData("users", token).then((response) => {
-      //   if(response.status === "success") {
-      //     setUserData({
-      //       name: response.data.user.name,
-      //       email: response.data.user.email,
-      //       phone: response.data.user.phone,
-      //       address: response.data.user.address,
-      //       avatar: response.data.user.photo,
-      //       loggedIn: true,
-      //     });
-      //   }
-      // });
+      if (role === "patient") {
+        const fetchData = async () => {
+          const response = await getData(`/patient/getPatientByToken/${token}`);
+          if(response){
+            setUserData({
+              name: response.UserData.userName,
+              email: response.UserData.email,
+              phone: response.UserData.phone,
+              avatar: response.UserData.avatar,
+              healthRecord: response.UserData.healthRecord,
+              long: response.UserData.location.coordinates.long,
+              lat: response.UserData.location.coordinates.lat,
+              dateOfBirth: response.UserData.dateOfBirth,
+              role: "patient",
+              loggedIn: true,
+            }); 
+          }
+        };
+        fetchData();
+      } else if (role === "carer") {
+        const fetchData = async () => {
+          const response = await getData(`/caregiver/getCaregiverByToken/${token}`);
+          if(response){
+            setUserData({
+              name: response.UserData.userName,
+              email: response.UserData.email,
+              phone: response.UserData.phone,
+              avatar: response.UserData.avatar,
+              bio: response.UserData.biography,
+              canYouDrive: response.UserData.canYouDrive,
+              dateOfBirth: response.UserData.dateOfBirth,
+              doYouSmoke: response.UserData.doYouSmoke,
+              long: response.UserData.location.coordinates.long,
+              lat: response.UserData.location.coordinates.lat,
+              role: "carer",
+              loggedIn: true,
+            })
+          }
+        };
+        fetchData();
+      }
     }
   }, []);
 

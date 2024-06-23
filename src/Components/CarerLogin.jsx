@@ -35,7 +35,20 @@ const CarerLogin = () => {
       toast.success("Account created successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "carer");
-      setUserData({ ...userData, loggedIn: true });
+      setUserData({
+        name: response.UserData.userName,
+        email: response.UserData.email,
+        phone: response.UserData.phone,
+        avatar: response.UserData.avatar,
+        bio: response.UserData.biography,
+        canYouDrive: response.UserData.canYouDrive,
+        dateOfBirth: response.UserData.dateOfBirth,
+        doYouSmoke: response.UserData.doYouSmoke,
+        long: response.UserData.location.coordinates.long,
+        lat: response.UserData.location.coordinates.lat,
+        role: "carer",
+        loggedIn: true,
+      });
     }
   };
 
