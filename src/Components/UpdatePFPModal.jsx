@@ -14,31 +14,43 @@ import camera from "/assets/camera.png";
 const UpdatePFPModal = () => {
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
   const fileInput = useRef(null);
   const token = localStorage.getItem("token");
   const role = localStorage.getItem("role");
+  const id = localStorage.getItem("ID");
 
   const handleChange = async (e) => {
     const image = await openEditor({ src: fileInput.current.files[0], square: true, size: 200 });
-    setImage(image?.editedImage?.getDataURL());
+    setImage(image?.editedImage);
+    setPreviewImage(image?.editedImage.getDataURL());
   };
 
   const handleUpload = async () => {
-    if(image === null) {
+    if (image === null) {
       return toast.error("Please select an image");
     }
-    console.log(image);
     toast.info("Uploading...");
-    if(role === "carer") {
-      const response = await putData(`caregiver/editProfile/${token}`, { profilePhoto: image });
-      console.log(response);
-      toast.success("Profile Picture Updated");
-      return;
-    }else if(role === "patient") {
-      const response = await putData(`patient/editProfile/${token}`, { profilePhoto: image });
-      console.log(response);
-      toast.success("Profile Picture Updated");
-      return;
+    if (role === "carer") {
+      const response = await putData(`caregiver/editProfile/${id}`, { profilePhoto: image });
+      if (response.message === "Caregiver profile updated successfully") {
+        toast.success("Profile Picture Updated");
+        setOpen(false);
+        return;
+      } else {
+        toast.error("Failed to update profile picture");
+        return;
+      }
+    } else if (role === "patient") {
+      const response = await putData(`patient/editProfile/${id}`, { profilePhoto: image });
+      if (response.message === "Patient profile updated successfully") {
+        toast.success("Profile Picture Updated");
+        setOpen(false);
+        return;
+      } else {
+        toast.error("Failed to update profile picture");
+        return;
+      }
     }
   };
 
@@ -60,9 +72,7 @@ const UpdatePFPModal = () => {
               </button>
               <input onChange={handleChange} ref={fileInput} type="file" className="hidden" accept="image/*" />
             </div>
-            <div className="flex justify-center mb-4">
-              {image ? <img src={image} alt="new profile photo" className="rounded-full size-[250px]" /> : "No Image Selected"}
-            </div>
+            <div className="flex justify-center mb-4">{previewImage ? <img src={previewImage} alt="new profile photo" className="rounded-full size-[250px]" /> : "No Image Selected"}</div>
             <div className="flex justify-center items-center mb-4">
               <button onClick={handleUpload} className="text-lg bg-accent hover:bg-red-700 duration-200 text-white py-2 w-[200px] font-medium">
                 Upload
