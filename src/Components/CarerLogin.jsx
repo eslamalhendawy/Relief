@@ -30,12 +30,12 @@ const CarerLogin = () => {
     }
     toast.info("Logging in...");
     const response = await postData("caregiver/signin", { email, password });
-    console.log(response);
     if (response.token) {
       navigate("/");
       toast.success("Account created successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "carer");
+      localStorage.setItem("ID", response.UserData._id);
       setUserData({
         name: response.UserData.userName,
         email: response.UserData.email,
@@ -47,6 +47,7 @@ const CarerLogin = () => {
         doYouSmoke: response.UserData.doYouSmoke,
         long: response.UserData.location.coordinates.long,
         lat: response.UserData.location.coordinates.lat,
+        id: response.UserData._id,
         role: "carer",
         loggedIn: true,
       });
@@ -78,7 +79,7 @@ const CarerLogin = () => {
             </div>
           </div>
           <div className="text-right mb-4">
-            <Link to="/forgot-password" className="#212529 font-medium hover:text-accent duration-200 text-lg">
+            <Link to="/forgot-password-carer" className="#212529 font-medium hover:text-accent duration-200 text-lg">
               Forgot Password ?
             </Link>
           </div>
@@ -91,7 +92,7 @@ const CarerLogin = () => {
           <div>
             <p className="text-center font-medium text-[#212529] text-lg">
               Don't have an account?{" "}
-              <Link to="/sign-up" className="font-bold text-accent hover:text-red-700 duration-200 text-lg">
+              <Link to="/carer-sign-up" className="font-bold text-accent hover:text-red-700 duration-200 text-lg">
                 Register
               </Link>
             </p>

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-import NeedHelp from "./NeedHelp";
 
 import image from "/assets/getStarted.png";
 
@@ -13,7 +12,6 @@ const GetStarted = () => {
 
   return (
     <section className="container mx-auto px-4 py-16">
-      {/* <NeedHelp /> */}
       <div className="flex flex-col items-center justify-center border-2 border-[#BBD0FF] rounded-xl py-12  lg:w-[70%] mx-auto px-2">
         <img src={image} alt="" />
         <h1 className="font-semibold text-3xl md:text-5xl md:text-left md:w-[70%] mb-2">Let's get started</h1>

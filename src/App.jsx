@@ -29,6 +29,12 @@ import ChooseCarer from "./Components/ChooseCarer";
 import CarerProfile from "./Components/CarerProfile";
 import CarerRatings from "./Components/CarerRatings";
 import CarerLogin from "./Components/CarerLogin";
+import ForgotPassword from "./Components/ForgotPassword";
+import OTP from "./Components/OTP";
+import ResetPassword from "./Components/ResetPassword";
+import ForgotPasswordCarer from "./Components/ForgotPasswordCarer";
+import OTPCarer from "./Components/OTPCarer";
+import ResetPasswordCarer from "./Components/ResetPasswordCarer";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -108,6 +114,12 @@ function App() {
           <Route path="/choose-carer" element={<ChooseCarer />} />
           <Route path="/carer-profile/:id" element={<CarerProfile />} />
           <Route path="/carer-ratings" element={<CarerRatings />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/otp" element={<OTP />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/forgot-password-carer" element={<ForgotPasswordCarer />} />
+          <Route path="/otp-carer" element={<OTPCarer />} />
+          <Route path="/reset-password-carer" element={<ResetPasswordCarer />} />
         </Routes>
       </Router>
       <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />

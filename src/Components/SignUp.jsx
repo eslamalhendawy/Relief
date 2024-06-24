@@ -72,11 +72,12 @@ const SignUp = () => {
     }
     toast.info("Creating account...");
     const response = await postData("patient/signup", {userName , email, dateOfBirth, password, re_password, phone, healthRecordText, gender, latitude, longitude});
-    if(response){
+    if(response.token){
       navigate("/");
       toast.success("Account created successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "patient");
+      localStorage.setItem("ID", response.UserData._id);
       setUserData({
         name: response.UserData.userName,
         email: response.UserData.email,
@@ -87,6 +88,7 @@ const SignUp = () => {
         lat: response.UserData.location.coordinates.lat,
         dateOfBirth: response.UserData.dateOfBirth,
         role: "patient",
+        id: response.UserData._id,
         loggedIn: true,
       });
     }

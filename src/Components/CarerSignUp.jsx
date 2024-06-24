@@ -79,6 +79,7 @@ const CarerSignUp = () => {
       toast.success("Account created successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "carer");
+      localStorage.setItem("ID", response.UserData._id);
       setUserData({
         name: response.UserData.userName,
         email: response.UserData.email,
@@ -91,6 +92,7 @@ const CarerSignUp = () => {
         long: response.UserData.location.coordinates.long,
         lat: response.UserData.location.coordinates.lat,
         role: "carer",
+        id: response.UserData._id,
         loggedIn: true,
       });
     }
@@ -240,7 +242,7 @@ const CarerSignUp = () => {
             <div>
               <p className="text-center font-medium text-[#212529] text-lg">
                 Already have an account?{" "}
-                <Link to="/carer-login" className="font-bold text-accent hover:text-red-700 duration-200 text-lg">
+                <Link to="/carer-sign-up" className="font-bold text-accent hover:text-red-700 duration-200 text-lg">
                   Log in
                 </Link>
               </p>

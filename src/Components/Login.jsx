@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
-  const { userData, setUserData } = useAppContext();
+  const { setUserData } = useAppContext();
   const navigate = useNavigate();
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 
@@ -33,6 +33,7 @@ const Login = () => {
     if (response.token) {
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "patient");
+      localStorage.setItem("ID", response.UserData._id);
       setUserData({
         name: response.UserData.userName,
         email: response.UserData.email,
@@ -43,6 +44,7 @@ const Login = () => {
         lat: response.UserData.location.coordinates.lat,
         dateOfBirth: response.UserData.dateOfBirth,
         role: "patient",
+        id: response.UserData._id,
         loggedIn: true,
       });
       toast.success("Logged in successfully");

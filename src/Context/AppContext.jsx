@@ -17,6 +17,7 @@ export const AppProvider = ({ children }) => {
     lat: "",
     dateOfBirth: "",
     role: "",
+    id: "",
     loggedIn: false,
   });
   return <AppContext.Provider value={{ userData, setUserData }}>{children}</AppContext.Provider>;
