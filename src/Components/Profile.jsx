@@ -157,7 +157,7 @@ const Profile = () => {
           </div>
         )}
         <div className="flex justify-end gap-4">
-          <button disabled={!update} onClick={handleUpdate} className={`capitalize bg-accent hover:bg-red-700 duration-200  py-1 px-12 rounded-2xl font-semibold border border-accent text-center text-xl ${!update ? "bg-[#fafafa] hover:bg-[#fafafa] border-[#999999] text-[#bdbbbb]" : "text-white"}`}>
+          <button disabled={!update} onClick={handleUpdate} className={`capitalize  duration-200  py-1 px-12 rounded-2xl font-semibold border  text-center text-xl ${!update ? "bg-[#fafafa] hover:bg-[#fafafa] border-[#999999] text-[#bdbbbb]" : "text-white bg-accent hover:bg-red-700 border-accent"}`}>
             Save
           </button>
           <button onClick={handleLogout} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-1 px-12 rounded-2xl font-semibold border border-accent text-center text-xl">
