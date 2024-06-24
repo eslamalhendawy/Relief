@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { postData } from "../Services/apiCalls";
+import { useParams } from "react-router-dom";
 
 import Modal from "@mui/material/Modal";
 import Rating from "@mui/material/Rating";
@@ -7,6 +9,15 @@ const AddReviewModal = () => {
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(0);
   const [comment, setComment] = useState("");
+  const { id } = useParams();
+  const token = localStorage.getItem("token");
+
+
+  const handleClick = async () => {
+    const response = await postData(`requests/${id}/rate`, { rating: value, messageRating: comment }, token);
+    console.log(response);
+  };
+
   return (
     <>
       <button onClick={() => setOpen(true)} className="outline-none flex items-center justify-center gap-2 border border-[#BBD0FF] hover:bg-[#BBD0FF] rounded-2xl duration-200 p-2">
@@ -29,7 +40,7 @@ const AddReviewModal = () => {
             <h3 className="font-semibold text-2xl mb-4">Tell Us More (Optional)</h3>
             <input onChange={(e) => setComment(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl w-full mb-6" type="text" placeholder="Why This Rating" />
             <div className="flex justify-end">
-              <button className="bg-accent hover:bg-red-700 duration-200 text-white px-16 py-2 font-semibold rounded-2xl">Submit</button>
+              <button onClick={handleClick} className="bg-accent hover:bg-red-700 duration-200 text-white px-16 py-2 font-semibold rounded-2xl">Submit</button>
             </div>
           </div>
         </div>

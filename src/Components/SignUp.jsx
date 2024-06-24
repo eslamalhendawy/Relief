@@ -23,6 +23,7 @@ const SignUp = () => {
   const [tempDate, setTempDate] = useState("");
   const [healthRecordText, setHealthRecords] = useState("");
   const [hidden, setHidden] = useState(true);
+  const [hidden2, setHidden2] = useState(true);
   const { userData, setUserData } = useAppContext();
   const navigate = useNavigate();
 
@@ -76,7 +77,18 @@ const SignUp = () => {
       toast.success("Account created successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "patient");
-      setUserData({...userData, loggedIn : true});
+      setUserData({
+        name: response.UserData.userName,
+        email: response.UserData.email,
+        phone: response.UserData.phone,
+        avatar: response.UserData.profilePhoto,
+        healthRecord: response.UserData.healthRecord,
+        long: response.UserData.location.coordinates.long,
+        lat: response.UserData.location.coordinates.lat,
+        dateOfBirth: response.UserData.dateOfBirth,
+        role: "patient",
+        loggedIn: true,
+      });
     }
   };
 
@@ -126,9 +138,9 @@ const SignUp = () => {
                 Confirm Password
               </label>
               <div className="relative">
-                <input onChange={(e) => setRePassword(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:border-[#00B4D8] focus:placeholder:opacity-0 placeholder:duration-200 duration-200 px-2 py-1 text-lg rounded-xl w-full" type={hidden ? "password" : "text"} id="rePassword" placeholder="Confirm your password" />
-                <button onClick={() => setHidden(!hidden)} className="absolute right-2 top-[50%] translate-y-[-50%] text-[#ADB5BD] hover:text-black duration-300">
-                  <i className={`fa-solid  text-lg ${hidden ? "fa-eye" : "fa-eye-slash"}`}></i>
+                <input onChange={(e) => setRePassword(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:border-[#00B4D8] focus:placeholder:opacity-0 placeholder:duration-200 duration-200 px-2 py-1 text-lg rounded-xl w-full" type={hidden2 ? "password" : "text"} id="rePassword" placeholder="Confirm your password" />
+                <button onClick={() => setHidden2(!hidden2)} className="absolute right-2 top-[50%] translate-y-[-50%] text-[#ADB5BD] hover:text-black duration-300">
+                  <i className={`fa-solid  text-lg ${hidden2 ? "fa-eye" : "fa-eye-slash"}`}></i>
                 </button>
               </div>
             </div>

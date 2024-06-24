@@ -37,7 +37,7 @@ const Login = () => {
         name: response.UserData.userName,
         email: response.UserData.email,
         phone: response.UserData.phone,
-        avatar: response.UserData.avatar,
+        avatar: response.UserData.profilePhoto,
         healthRecord: response.UserData.healthRecord,
         long: response.UserData.location.coordinates.long,
         lat: response.UserData.location.coordinates.lat,
@@ -47,6 +47,8 @@ const Login = () => {
       });
       toast.success("Logged in successfully");
       navigate("/");
+    }else{
+      toast.error("Invalid email or password");
     }
   };
 

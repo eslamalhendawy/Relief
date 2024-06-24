@@ -13,7 +13,6 @@ const Header = () => {
 
   const linkClasses = "border border-[#8D99AE] hover:border-navyColor text-[#8D99AE] hover:text-navyColor duration-200 px-4 py-1 rounded-xl";
 
-
   return (
     <header className="container mx-auto px-2">
       <nav className="flex items-center justify-between">
@@ -53,7 +52,15 @@ const Header = () => {
         </div>
         <div className="hidden lg:flex items-center gap-4">
           {userData.loggedIn ? (
-            <Link onClick={() => setHidden(true)} to="/profile"><img className="size-[60px] cursor-pointer" src={avatar} alt="" /></Link>
+            <Link onClick={() => setHidden(true)} to="/profile">
+              {userData.avatar ? (
+                <img className="size-[60px] cursor-pointer" src={userData.avatar} alt="" />
+              ) : (
+                <div className="size-[60px] bg-accent rounded-full flex justify-center items-center">
+                  <span className="text-white font-semibold text-2xl">{userData.name[0]}</span>
+                </div>
+              )}
+            </Link>
           ) : (
             <>
               <Link onClick={() => setHidden(true)} to="/login" className="bg-accent hover:bg-red-700 duration-200 text-white py-1 w-[80px] lg:w-[100px] text-lg rounded-xl text-center">
@@ -70,5 +77,5 @@ const Header = () => {
     </header>
   );
 };
-
+<img className="size-[60px] cursor-pointer" src={avatar} alt="" />;
 export default Header;

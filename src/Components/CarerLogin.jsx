@@ -30,6 +30,7 @@ const CarerLogin = () => {
     }
     toast.info("Logging in...");
     const response = await postData("caregiver/signin", { email, password });
+    console.log(response);
     if (response.token) {
       navigate("/");
       toast.success("Account created successfully");
@@ -39,7 +40,7 @@ const CarerLogin = () => {
         name: response.UserData.userName,
         email: response.UserData.email,
         phone: response.UserData.phone,
-        avatar: response.UserData.avatar,
+        avatar: response.UserData.profilePhoto,
         bio: response.UserData.biography,
         canYouDrive: response.UserData.canYouDrive,
         dateOfBirth: response.UserData.dateOfBirth,
@@ -49,6 +50,8 @@ const CarerLogin = () => {
         role: "carer",
         loggedIn: true,
       });
+    } else {
+      toast.error("Invalid email or password");
     }
   };
 

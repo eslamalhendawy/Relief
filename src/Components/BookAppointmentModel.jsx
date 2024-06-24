@@ -1,20 +1,26 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { postData } from "../Services/apiCalls";
 
 import Modal from "@mui/material/Modal";
 import Select from "react-select";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const days = Array.from({ length: 31 }, (_, i) => ({ value: i + 1, label: i + 1 }));
 const months = Array.from({ length: 12 }, (_, i) => ({ value: i + 1, label: i + 1 }));
+
 const type = [
-  { value: "days", label: "Days" },
-  { value: "months", label: "Months" },
+  { value: "day", label: "Days" },
+  { value: "month", label: "Months" },
 ];
 
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
     border: "1px solid #BBD0FF",
-    borderRadius: "20px",
+    borderRadius: "12px",
     padding: "4px 6px",
     boxShadow: state.isFocused ? "0 0 0 2px #2868c7" : null,
     outline: "none",
@@ -30,10 +36,12 @@ const BookAppointmentModel = () => {
   const [open, setOpen] = useState(false);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
-  const [time, setTime] = useState(null);
-  const [hour, setHour] = useState(null);
+  const [hours, setHour] = useState(null);
   const [minutes, setMinutes] = useState(null);
-  const [duration, setDuration] = useState(null);
+  const [unit, setUnit] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const { id } = useParams();
+  const token = localStorage.getItem("token");
 
   const input1 = useRef(null);
   const input2 = useRef(null);
@@ -59,9 +67,20 @@ const BookAppointmentModel = () => {
     }
   };
 
-  useEffect(() => {
-    setTime(`${hour}:${minutes}`);
-  }, [hour, minutes]);
+  const handleClick = async () => {
+    if (!day || !month || !hours || !minutes || !unit || !amount) {
+      return toast.error("Please fill all the fields");
+    }
+    let tempHours = Number(hours);
+    let tempMinutes = Number(minutes);
+    let tempAmount = Number(amount);
+    toast.info("Please wait while we book your appointment")
+    const response = await postData(`patient/Specificrequests/${id}`, { appointmentDateTime: { day, month, hours: tempHours, minutes: tempMinutes }, determineThePeriodOfService: { amount : tempAmount, unit } }, token);
+    if(response){
+      toast.success("Appointment Booked Successfully")
+      setOpen(false);
+    }
+  };
 
   return (
     <>
@@ -93,12 +112,12 @@ const BookAppointmentModel = () => {
               <div className="mb-6">
                 <h3 className="text-2xl font-semibold mb-4 text-[#212529] capitalize ">Determine the period of service</h3>
                 <div className="flex flex-col md:flex-row md:items-center gap-4">
-                  <input type="text" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl block w-full" placeholder="Enter Number Of Days Or Months" />
-                  <Select className="basis-1/2" onChange={(e) => setDuration(e.value)} styles={customStyles} options={type} placeholder="Select" />
+                  <input onChange={(e) => setAmount(e.target.value)} type="number" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl block w-full" placeholder="Enter Number Of Days Or Months" />
+                  <Select className="basis-1/2" onChange={(e) => setUnit(e.value)} styles={customStyles} options={type} placeholder="Select" />
                 </div>
               </div>
               <div className="flex justify-end">
-                <button className="bg-accent hover:bg-red-700 duration-200 text-white px-16 py-2 font-semibold rounded-2xl">
+                <button onClick={handleClick} className="bg-accent hover:bg-red-700 duration-200 text-white px-16 py-2 font-semibold rounded-2xl">
                   Submit
                 </button>
               </div>

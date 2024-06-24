@@ -26,7 +26,7 @@ const CarerSignUp = () => {
   const [tempDate, setTempDate] = useState("");
   const [doYouSmoke, setSmoker] = useState(null);
   const [canYouDrive, setDriver] = useState(null);
-  const { userData, setUserData } = useAppContext();
+  const { setUserData } = useAppContext();
   const navigate = useNavigate();
 
   const regNumbers = /^[0-9]+$/;
@@ -79,7 +79,20 @@ const CarerSignUp = () => {
       toast.success("Account created successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "carer");
-      setUserData({ ...userData, loggedIn: true });
+      setUserData({
+        name: response.UserData.userName,
+        email: response.UserData.email,
+        phone: response.UserData.phone,
+        avatar: response.UserData.profilePhoto,
+        bio: response.UserData.biography,
+        canYouDrive: response.UserData.canYouDrive,
+        dateOfBirth: response.UserData.dateOfBirth,
+        doYouSmoke: response.UserData.doYouSmoke,
+        long: response.UserData.location.coordinates.long,
+        lat: response.UserData.location.coordinates.lat,
+        role: "carer",
+        loggedIn: true,
+      });
     }
     console.log();
   };
@@ -213,7 +226,7 @@ const CarerSignUp = () => {
                 <button onClick={() => setDriver("yes")} className={`text-center border w-[50%] border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${canYouDrive === "yes" && "bg-[#BBD0FF]"}`}>
                   Yes
                 </button>
-                <button onClick={() => setDriver(false)} className={`text-center border w-[50%]  border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${canYouDrive === "no" && "bg-[#BBD0FF]"}`}>
+                <button onClick={() => setDriver("no")} className={`text-center border w-[50%]  border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${canYouDrive === "no" && "bg-[#BBD0FF]"}`}>
                   No
                 </button>
               </div>

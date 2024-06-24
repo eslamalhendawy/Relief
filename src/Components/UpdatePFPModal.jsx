@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { putData } from "../Services/apiCalls";
 
 import Modal from "@mui/material/Modal";
 
@@ -14,6 +15,8 @@ const UpdatePFPModal = () => {
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(null);
   const fileInput = useRef(null);
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const handleChange = async (e) => {
     const image = await openEditor({ src: fileInput.current.files[0], square: true, size: 200 });
@@ -24,9 +27,19 @@ const UpdatePFPModal = () => {
     if(image === null) {
       return toast.error("Please select an image");
     }
+    console.log(image);
     toast.info("Uploading...");
-    toast.success("Profile Picture Updated");
-    setOpen(false);
+    if(role === "carer") {
+      const response = await putData(`caregiver/editProfile/${token}`, { profilePhoto: image });
+      console.log(response);
+      toast.success("Profile Picture Updated");
+      return;
+    }else if(role === "patient") {
+      const response = await putData(`patient/editProfile/${token}`, { profilePhoto: image });
+      console.log(response);
+      toast.success("Profile Picture Updated");
+      return;
+    }
   };
 
   return (

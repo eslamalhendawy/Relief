@@ -6,7 +6,7 @@ export const postData = async (url, data, token) => {
   await axios
     .post(baseURL + url, data, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `${token}`,
       },
     })
     .then((response) => {
