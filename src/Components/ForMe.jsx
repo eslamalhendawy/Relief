@@ -31,22 +31,20 @@ const customStyles = {
 
 const ForMe = () => {
   const [stage, setStage] = useState(1);
-  const [q1, setQ1] = useState(null);
-  const [q2, setQ2] = useState(null);
-  const [q3, setQ3] = useState(null);
-  const [q4, setQ4] = useState(null);
-  const [q5, setQ5] = useState(null);
-  const [q6, setQ6] = useState(null);
-  const [q7, setQ7] = useState(null);
-  const [q8, setQ8] = useState(null);
-  const [q9, setQ9] = useState(null);
+  const [HowManyPeopleAreYouArrangingCareFor, setHowManyPeopleAreYouArrangingCareFor] = useState(null);
+  const [HowManyWeeksOfCareAreRequired, setHowManyWeeksOfCareAreRequired] = useState(null);
+  const [WhenWouldYouLikeTheCareToStart, setWhenWouldYouLikeTheCareToStart] = useState(null);
+  const [DoesThePropertyHaveAPrivateBedroomForTheCarer, setDoesThePropertyHaveAPrivateBedroomForTheCarer] = useState(null);
+  const [DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer, setDoYouHaveAnyPreferenceOnTheGenderOfTheirCarer] = useState(null);
+  const [WouldYouAcceptACarerWhoSmokes, setWouldYouAcceptACarerWhoSmokes] = useState(null);
+  const [DoYouNeedACarerThatCanDrive, setDoYouNeedACarerThatCanDrive] = useState(null);
   const [q10, setQ10] = useState(null);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
-  const [time, setTime] = useState(null);
   const [hour, setHour] = useState(null);
   const [minutes, setMinutes] = useState(null);
-  const [duration, setDuration] = useState(null);
+  const [amount, setAmount] = useState(null);
+  const [unit, setUnit] = useState(null);
   const { userData } = useAppContext();
   const navigate = useNavigate();
 
@@ -80,18 +78,17 @@ const ForMe = () => {
   }, [stage]);
 
   const handleStage1 = () => {
-    if (!q1 || !q2 || !q3 || !q4) {
+    if (!HowManyPeopleAreYouArrangingCareFor || !setHowManyWeeksOfCareAreRequired || !WhenWouldYouLikeTheCareToStart || !setDoesThePropertyHaveAPrivateBedroomForTheCarer) {
       return toast.error("Please answer all questions");
     }
     setStage(2);
   };
 
   const sendRequest = () => {
-    if (!q5 || !q6 || !q7 || !q8 || !q9 || !q10) {
+    if (!DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer || !WouldYouAcceptACarerWhoSmokes || !DoYouNeedACarerThatCanDrive || !q10 || !day || !month || !hour || !minutes || !amount || !unit) {
       return toast.error("Please answer all questions");
     }
-    toast.info("Your Request Has Been Sent");
-    navigate("/");
+    toast.info("Sending Request...");
   };
 
   return (
@@ -102,10 +99,10 @@ const ForMe = () => {
             <span className="text-[#ADB5BD] font-medium text-sm md:text-base">YOUR RELATIONSHIP</span>
             <h3 className="font-semibold mb-3 md:text-xl">How many people are you arranging care for?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ1(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q1 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setHowManyPeopleAreYouArrangingCareFor(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyPeopleAreYouArrangingCareFor === 1 && "bg-[#BBD0FF]"}`}>
                 1
               </button>
-              <button onClick={() => setQ1(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q1 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setHowManyPeopleAreYouArrangingCareFor(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyPeopleAreYouArrangingCareFor === 2 && "bg-[#BBD0FF]"}`}>
                 2
               </button>
             </div>
@@ -114,13 +111,13 @@ const ForMe = () => {
             <span className="text-[#ADB5BD] font-medium text-sm md:text-base">WEEKS OF CARE</span>
             <h3 className="font-semibold mb-3 md:text-xl">How many weeks of care are required?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ2(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q2 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setHowManyWeeksOfCareAreRequired("1-3 weeks")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyWeeksOfCareAreRequired === "1-3 weeks" && "bg-[#BBD0FF]"}`}>
                 1-3 Weeks
               </button>
-              <button onClick={() => setQ2(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q2 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setHowManyWeeksOfCareAreRequired("4-8 weeks")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyWeeksOfCareAreRequired === "4-8 weeks" && "bg-[#BBD0FF]"}`}>
                 4-8 Weeks
               </button>
-              <button onClick={() => setQ2(3)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q2 === 3 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setHowManyWeeksOfCareAreRequired("ongoing")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyWeeksOfCareAreRequired === "ongoing" && "bg-[#BBD0FF]"}`}>
                 Ongoing
               </button>
             </div>
@@ -129,13 +126,13 @@ const ForMe = () => {
             <span className="text-[#ADB5BD] font-medium text-sm md:text-base">START DATE</span>
             <h3 className="font-semibold mb-3 md:text-xl">When would you like the care to start?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ3(1)} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q3 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setWhenWouldYouLikeTheCareToStart("Immediately")} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WhenWouldYouLikeTheCareToStart === "Immediately" && "bg-[#BBD0FF]"}`}>
                 Immediately
               </button>
-              <button onClick={() => setQ3(2)} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q3 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setWhenWouldYouLikeTheCareToStart("within a week")} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WhenWouldYouLikeTheCareToStart === "within a week" && "bg-[#BBD0FF]"}`}>
                 Within A Week
               </button>
-              <button onClick={() => setQ3(3)} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q3 === 3 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setWhenWouldYouLikeTheCareToStart(3)} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WhenWouldYouLikeTheCareToStart === 3 && "bg-[#BBD0FF]"}`}>
                 1-3 month
               </button>
             </div>
@@ -144,10 +141,10 @@ const ForMe = () => {
             <span className="text-[#ADB5BD] font-medium text-sm md:text-base">ARRANGE CARE</span>
             <h3 className="font-semibold mb-3 md:text-xl">Does the property have a private bedroom for the carer?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ4(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q4 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoesThePropertyHaveAPrivateBedroomForTheCarer("yes")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoesThePropertyHaveAPrivateBedroomForTheCarer === "yes" && "bg-[#BBD0FF]"}`}>
                 Yes
               </button>
-              <button onClick={() => setQ4(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q4 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoesThePropertyHaveAPrivateBedroomForTheCarer("no")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoesThePropertyHaveAPrivateBedroomForTheCarer === "no" && "bg-[#BBD0FF]"}`}>
                 No
               </button>
             </div>
@@ -214,37 +211,35 @@ const ForMe = () => {
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">Does {userData.name} have any preference on the gender of their carer?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ5(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q5 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoYouHaveAnyPreferenceOnTheGenderOfTheirCarer("male")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer === "male" && "bg-[#BBD0FF]"}`}>
                 Male
               </button>
-              <button onClick={() => setQ5(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q5 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoYouHaveAnyPreferenceOnTheGenderOfTheirCarer("female")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer === "female" && "bg-[#BBD0FF]"}`}>
                 Female
               </button>
-              <button onClick={() => setQ5(3)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q5 === 3 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoYouHaveAnyPreferenceOnTheGenderOfTheirCarer("no preference")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer === "no preference" && "bg-[#BBD0FF]"}`}>
                 No Preference
               </button>
             </div>
           </div>
-
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">Would you accept a carer who smokes?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ6(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q6 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setWouldYouAcceptACarerWhoSmokes("yes")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WouldYouAcceptACarerWhoSmokes === "yes" && "bg-[#BBD0FF]"}`}>
                 Yes
               </button>
-              <button onClick={() => setQ6(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q6 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setWouldYouAcceptACarerWhoSmokes("no")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WouldYouAcceptACarerWhoSmokes === "no" && "bg-[#BBD0FF]"}`}>
                 No
               </button>
             </div>
           </div>
-
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">Do you need a carer that can drive?</h3>
             <div className="flex flex-col gap-3">
-              <button onClick={() => setQ7(1)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q7 === 1 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoYouNeedACarerThatCanDrive("yes")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoYouNeedACarerThatCanDrive === "yes" && "bg-[#BBD0FF]"}`}>
                 Yes
               </button>
-              <button onClick={() => setQ7(2)} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${q7 === 2 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setDoYouNeedACarerThatCanDrive("no")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${DoYouNeedACarerThatCanDrive === "no" && "bg-[#BBD0FF]"}`}>
                 No
               </button>
             </div>
@@ -254,8 +249,8 @@ const ForMe = () => {
             <h3 className="font-semibold mb-3 md:text-xl">Determine the period of service</h3>
             <div className="flex flex-col gap-3">
               <div className="flex flex-col md:flex-row md:items-center gap-4">
-                <input type="text" className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl block w-full" placeholder="Enter Number Of Days Or Months" />
-                <Select className="basis-1/2" onChange={(e) => setDuration(e.value)} styles={customStyles} options={type} placeholder="Select" />
+                <input type="text" onChange={(e) => setAmount(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-[6px] text-lg rounded-xl block w-full" placeholder="Enter Number Of Days Or Months" />
+                <Select className="basis-1/2" onChange={(e) => setUnit(e.value)} styles={customStyles} options={type} placeholder="Select" />
               </div>
             </div>
           </div>
@@ -273,12 +268,12 @@ const ForMe = () => {
             </div>
           </div>
 
-          <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
+          {/* <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">What is the full address of {userData.name}&apos;s home?</h3>
             <div className="flex flex-col gap-3">
               <input onChange={(e) => setQ9(e.target.value)} className="outline-none border border-[#BBD0FF] focus:border-[1.5px] focus:placeholder:opacity-0 placeholder:duration-200 focus:border-[#00B4D8] duration-200 px-2 py-1 text-lg rounded-xl" type="text" id="location" placeholder={`Enter ${userData.name}'s Location`} />
             </div>
-          </div>
+          </div> */}
 
           <div className="lg:w-[80%] xl:w-[70%] lg:mx-auto mb-8">
             <h3 className="font-semibold mb-3 md:text-xl">Please click to confirm the following:</h3>

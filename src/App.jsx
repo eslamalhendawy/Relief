@@ -122,7 +122,7 @@ function App() {
           <Route path="/reset-password-carer" element={<ResetPasswordCarer />} />
         </Routes>
       </Router>
-      <ToastContainer autoClose={2500} theme="dark" newestOnTop={true} />
+      <ToastContainer autoClose={2000} theme="dark" newestOnTop={true} />
     </>
   );
 }

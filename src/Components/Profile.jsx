@@ -10,6 +10,7 @@ import ChangePasswordCarer from "./ChangePasswordCarer";
 import CarerProfileHeader from "./CarerProfileHeader";
 
 import flag from "/assets/egypt.png";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const { userData, setUserData } = useAppContext();
@@ -25,7 +26,7 @@ const Profile = () => {
   const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  const id = localStorage.getItem("ID");
   const role = localStorage.getItem("role");
 
   useEffect(() => {
@@ -38,7 +39,7 @@ const Profile = () => {
   useEffect(() => {
     if (!editName || !editEmail || !editPhone || !editBio || !editLocation) {
       setUpdate(true);
-    }else{
+    } else {
       setUpdate(false);
     }
   }, [editName, editEmail, editPhone, editBio, editLocation]);
@@ -55,13 +56,24 @@ const Profile = () => {
   };
 
   const handleUpdate = async () => {
-    console.log({userName, email, phone, biography});
-    if(role === "patient"){
-      const response = await putData(`patients/editProfile/${token}`, {userName, email, phone});
-      console.log(response);
-    }else if(role === "carer"){
-      const response = await putData(`carers/editProfile/${token}`, {userName, email, phone, biography});
-      console.log(response);
+    if (role === "patient") {
+      toast.info("Updating Patient Profile");
+      const response = await putData(`patient/editProfile/${id}`, { userName, email, phone });
+      if (response.message === "Patient profile updated successfully") {
+        toast.success("Profile Updated Successfully");
+        window.location.reload();
+      } else {
+        toast.error("Profile Update Failed");
+      }
+    } else if (role === "carer") {
+      toast.info("Updating Caregiver Profile");
+      const response = await putData(`caregiver/editProfile/${id}`, { userName, email, phone, biography });
+      if (response.message === "Caregiver profile updated successfully") {
+        toast.success("Profile Updated Successfully");
+        window.location.reload();
+      } else {
+        toast.error("Profile Update Failed");
+      }
     }
   };
 
