@@ -1,10 +1,8 @@
 import { useState, useRef } from "react";
+import { useAppContext } from "../Context/AppContext";
 import { putData } from "../Services/apiCalls";
 
 import Modal from "@mui/material/Modal";
-
-import "react-profile/themes/default";
-import { openEditor } from "react-profile";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -12,18 +10,18 @@ import "react-toastify/dist/ReactToastify.css";
 import camera from "/assets/camera.png";
 
 const UpdatePFPModal = () => {
+  const { userData } = useAppContext();
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  const fileInput = useRef(null);
-  const token = localStorage.getItem("token");
-  const role = localStorage.getItem("role");
-  const id = localStorage.getItem("ID");
+  const fileInput = useRef(null);``
 
   const handleChange = async (e) => {
-    const image = await openEditor({ src: fileInput.current.files[0], square: true, size: 200 });
-    setImage(image?.editedImage);
-    setPreviewImage(image?.editedImage.getDataURL());
+    const image = e.target.files[0];
+    if(image){
+      setImage(image);
+      setPreviewImage(URL.createObjectURL(image));
+    } 
   };
 
   const handleUpload = async () => {
@@ -31,21 +29,25 @@ const UpdatePFPModal = () => {
       return toast.error("Please select an image");
     }
     toast.info("Uploading...");
-    if (role === "carer") {
-      const response = await putData(`caregiver/editProfile/${id}`, { profilePhoto: image });
+    const formData = new FormData();
+    formData.append("profilePhoto", image);
+    if (userData.role === "carer") {
+      const response = await putData(`caregiver/editProfile/${userData.id}`, formData);
       if (response.message === "Caregiver profile updated successfully") {
         toast.success("Profile Picture Updated");
         setOpen(false);
+        window.location.reload();
         return;
       } else {
         toast.error("Failed to update profile picture");
         return;
       }
-    } else if (role === "patient") {
-      const response = await putData(`patient/editProfile/${id}`, { profilePhoto: image });
+    } else if (userData.role === "patient") {
+      const response = await putData(`patient/editProfile/${userData.id}`, formData);
       if (response.message === "Patient profile updated successfully") {
         toast.success("Profile Picture Updated");
         setOpen(false);
+        window.location.reload();
         return;
       } else {
         toast.error("Failed to update profile picture");

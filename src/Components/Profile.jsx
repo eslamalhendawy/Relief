@@ -26,9 +26,6 @@ const Profile = () => {
   const [update, setUpdate] = useState(false);
   const navigate = useNavigate();
 
-  const id = localStorage.getItem("ID");
-  const role = localStorage.getItem("role");
-
   useEffect(() => {
     setUserName(userData.name);
     setBiography(userData.bio);
@@ -56,18 +53,18 @@ const Profile = () => {
   };
 
   const handleUpdate = async () => {
-    if (role === "patient") {
+    if (userData.role === "patient") {
       toast.info("Updating Patient Profile");
-      const response = await putData(`patient/editProfile/${id}`, { userName, email, phone });
+      const response = await putData(`patient/editProfile/${userData.id}`, { userName, email, phone });
       if (response.message === "Patient profile updated successfully") {
         toast.success("Profile Updated Successfully");
         window.location.reload();
       } else {
         toast.error("Profile Update Failed");
       }
-    } else if (role === "carer") {
+    } else if (userData.role === "carer") {
       toast.info("Updating Caregiver Profile");
-      const response = await putData(`caregiver/editProfile/${id}`, { userName, email, phone, biography });
+      const response = await putData(`caregiver/editProfile/${userData.id}`, { userName, email, phone, biography });
       if (response.message === "Caregiver profile updated successfully") {
         toast.success("Profile Updated Successfully");
         window.location.reload();
@@ -105,9 +102,9 @@ const Profile = () => {
                 <i className="fa-solid fa-calendar-check  text-3xl hover:text-[#00B4D8] duration-200"></i>
               </Link>
             ) : (
-              <button>
+              <Link to="/patient-notifications">
                 <i className="fa-regular fa-bell text-3xl hover:text-[#00B4D8] duration-200"></i>
-              </button>
+              </Link>
             )}
           </div>
         </div>

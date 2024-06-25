@@ -54,7 +54,7 @@ const Header = () => {
           {userData.loggedIn ? (
             <Link onClick={() => setHidden(true)} to="/profile">
               {userData.avatar ? (
-                <img className="size-[60px] cursor-pointer" src={userData.avatar} alt="" />
+                <img className="size-[60px] cursor-pointer rounded-full" src={userData.avatar} alt="" />
               ) : (
                 <div className="size-[60px] bg-accent hover:bg-red-700 duration-200 rounded-full flex justify-center items-center">
                   <span className="text-white font-semibold text-2xl">{userData.name[0]}</span>

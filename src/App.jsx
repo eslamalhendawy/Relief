@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./Components/Header";
 import HomePage from "./Components/HomePage";
-import Footer from "./Components/Footer";
 import AboutUs from "./Components/AboutUs";
 import ContactUs from "./Components/ContactUs";
 import LiveInCare from "./Components/LiveInCare";
@@ -35,6 +34,7 @@ import ResetPassword from "./Components/ResetPassword";
 import ForgotPasswordCarer from "./Components/ForgotPasswordCarer";
 import OTPCarer from "./Components/OTPCarer";
 import ResetPasswordCarer from "./Components/ResetPasswordCarer";
+import PatientNotifications from "./Components/PatientNotifications";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("token"));
@@ -52,12 +52,13 @@ function App() {
               name: response.UserData.userName,
               email: response.UserData.email,
               phone: response.UserData.phone,
-              avatar: response.UserData.avatar,
+              avatar: response.UserData.profilePhoto,
               healthRecord: response.UserData.healthRecord,
               long: response.UserData.location.coordinates.long,
               lat: response.UserData.location.coordinates.lat,
               dateOfBirth: response.UserData.dateOfBirth,
               role: "patient",
+              id: response.UserData._id,
               loggedIn: true,
             }); 
           }
@@ -71,7 +72,7 @@ function App() {
               name: response.UserData.userName,
               email: response.UserData.email,
               phone: response.UserData.phone,
-              avatar: response.UserData.avatar,
+              avatar: response.UserData.profilePhoto,
               bio: response.UserData.biography,
               canYouDrive: response.UserData.canYouDrive,
               dateOfBirth: response.UserData.dateOfBirth,
@@ -79,6 +80,7 @@ function App() {
               long: response.UserData.location.coordinates.long,
               lat: response.UserData.location.coordinates.lat,
               role: "carer",
+              id: response.UserData._id,
               loggedIn: true,
             })
           }
@@ -120,6 +122,7 @@ function App() {
           <Route path="/forgot-password-carer" element={<ForgotPasswordCarer />} />
           <Route path="/otp-carer" element={<OTPCarer />} />
           <Route path="/reset-password-carer" element={<ResetPasswordCarer />} />
+          <Route path="/patient-notifications" element={<PatientNotifications />} />
         </Routes>
       </Router>
       <ToastContainer autoClose={2000} theme="dark" newestOnTop={true} />
