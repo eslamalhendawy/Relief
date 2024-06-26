@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppContext } from "../Context/AppContext";
+import { postData } from "../Services/apiCalls";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,8 +10,8 @@ import Select from "react-select";
 const days = Array.from({ length: 31 }, (_, i) => ({ value: i + 1, label: i + 1 }));
 const months = Array.from({ length: 12 }, (_, i) => ({ value: i + 1, label: i + 1 }));
 const type = [
-  { value: "days", label: "Days" },
-  { value: "months", label: "Months" },
+  { value: "day", label: "Days" },
+  { value: "month", label: "Months" },
 ];
 
 const customStyles = {
@@ -47,6 +48,7 @@ const ForMe = () => {
   const [unit, setUnit] = useState(null);
   const { userData } = useAppContext();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const input1 = useRef(null);
   const input2 = useRef(null);
@@ -84,11 +86,22 @@ const ForMe = () => {
     setStage(2);
   };
 
-  const sendRequest = () => {
+  const sendRequest = async () => {
     if (!DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer || !WouldYouAcceptACarerWhoSmokes || !DoYouNeedACarerThatCanDrive || !q10 || !day || !month || !hour || !minutes || !amount || !unit) {
       return toast.error("Please answer all questions");
     }
+    const tempHours = Number(hour);
+    const tempMinutes = Number(minutes);
+    const tempAmount = Number(amount);
+    const data = { HowManyPeopleAreYouArrangingCareFor, HowManyWeeksOfCareAreRequired, WhenWouldYouLikeTheCareToStart, DoesThePropertyHaveAPrivateBedroomForTheCarer, DoYouHaveAnyPreferenceOnTheGenderOfTheirCarer, WouldYouAcceptACarerWhoSmokes, DoYouNeedACarerThatCanDrive, appointmentDateTime: { day, month, hours: tempHours, minutes: tempMinutes }, determineThePeriodOfService: { amount: tempAmount, unit } };
     toast.info("Sending Request...");
+    const response = await postData("patient/publicrequests", data, token);
+    if(response){
+      toast.success("Request Sent Successfully");
+      navigate("/");
+    }else{
+      toast.error("Failed to send request");
+    }
   };
 
   return (
@@ -117,7 +130,7 @@ const ForMe = () => {
               <button onClick={() => setHowManyWeeksOfCareAreRequired("4-8 weeks")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyWeeksOfCareAreRequired === "4-8 weeks" && "bg-[#BBD0FF]"}`}>
                 4-8 Weeks
               </button>
-              <button onClick={() => setHowManyWeeksOfCareAreRequired("ongoing")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyWeeksOfCareAreRequired === "ongoing" && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setHowManyWeeksOfCareAreRequired("Ongoing")} className={`text-left border border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${HowManyWeeksOfCareAreRequired === "Ongoing" && "bg-[#BBD0FF]"}`}>
                 Ongoing
               </button>
             </div>
@@ -132,7 +145,7 @@ const ForMe = () => {
               <button onClick={() => setWhenWouldYouLikeTheCareToStart("within a week")} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WhenWouldYouLikeTheCareToStart === "within a week" && "bg-[#BBD0FF]"}`}>
                 Within A Week
               </button>
-              <button onClick={() => setWhenWouldYouLikeTheCareToStart(3)} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WhenWouldYouLikeTheCareToStart === 3 && "bg-[#BBD0FF]"}`}>
+              <button onClick={() => setWhenWouldYouLikeTheCareToStart("1-3 month")} className={`text-left border capitalize border-[#BBD0FF] hover:bg-[#BBD0FF] duration-200 p-2 rounded-xl font-medium ${WhenWouldYouLikeTheCareToStart === "1-3 month" && "bg-[#BBD0FF]"}`}>
                 1-3 month
               </button>
             </div>

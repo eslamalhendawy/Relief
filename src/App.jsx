@@ -107,7 +107,7 @@ function App() {
           <Route path="/speak-to-expert" element={<SpeakToExpert />} />
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/choose-care-receiver" element={<ChooseCareReceiver />} />
-          <Route path="/for-me" element={<ForMe />} />
+          <Route path="/arrange-care" element={<ForMe />} />
           <Route path="/for-someone" element={<ForSomeone />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/carer-sign-up" element={<CarerSignUp />} />

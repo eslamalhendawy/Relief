@@ -5,20 +5,41 @@ import { getData } from "../Services/apiCalls";
 import Rating from "@mui/material/Rating";
 import Skeleton from "@mui/material/Skeleton";
 
-
 const ChooseCarer = () => {
   const [hidden, setHidden] = useState(true);
   const [carers, setCarers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState("all");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
+    setLoading(true);
+    setCarers([]);
     const fetchData = async () => {
-      const response = await getData("caregiver/displayAllCaregivers");
-      setCarers(response);
-      setLoading(false);
+      const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=10` : "caregiver/displayAllCaregivers", token);
+      console.log(response);
+      if (filter === "all") {
+        setCarers(response);
+        setLoading(false);
+      } else if (filter === "nearest") {
+        setCarers(response.caregiver);
+        setLoading(false);
+      } else if (filter === "rating") {
+        let tempList = response.filter((item) => {
+          return item.averageRating === 5 || item.averageRating === 4;
+        });
+        setCarers(tempList);
+        setLoading(false);
+      }
     };
     fetchData();
-  }, []);
+  }, [filter]);
+
+  const handleClick = (e) => {
+    setFilter(e);
+    setHidden(true);
+  };
+
 
   return (
     <section className="container mx-auto px-4 py-16">
@@ -32,12 +53,15 @@ const ChooseCarer = () => {
             <span>Filter</span>
             <i className="fa-solid fa-filter"></i>
           </button>
-          <ul className={`absolute bg-white border bottom-[-90px] right-0 w-[200px] text-center text-[#212529] font-semibold ${hidden && "hidden"}`}>
-            <li onClick={() => setHidden(true)} className="py-2 cursor-pointer border-b-2 hover:bg-[#f6f3ef] duration-200">
-              Care Giver Nearest To You
+          <ul className={`absolute bg-white border bottom-[-130px] right-0 w-[200px] text-center text-[#212529] font-semibold ${hidden && "hidden"}`}>
+            <li className="py-2 cursor-pointer border-b-2 hover:bg-[#f6f3ef] duration-200">
+              <button onClick={() => handleClick("all")}>All</button>
             </li>
-            <li onClick={() => setHidden(true)} className="py-2 cursor-pointer hover:bg-[#f6f3ef] duration-200">
-              Highest Rated
+            <li className="py-2 cursor-pointer border-b-2 hover:bg-[#f6f3ef] duration-200">
+              <button onClick={() => handleClick("nearest")}>Care Giver Nearest To You</button>
+            </li>
+            <li className="py-2 cursor-pointer hover:bg-[#f6f3ef] duration-200">
+              <button onClick={() => handleClick("rating")}>Highest Rated</button>
             </li>
           </ul>
         </div>
@@ -57,14 +81,15 @@ const ChooseCarer = () => {
           </div>
         )}
         {!loading &&
+          carers.length !== 0 &&
           carers.map((item, index) => (
             <Link to={`/carer-profile/${item._id}`} key={index}>
               <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 bg-[#F6F3EF] hover:bg-white duration-200 cursor-pointer border border-[#F6F3EF] hover:border-[#00B4D8] p-6 rounded-xl">
                 <div className="flex flex-col md:flex-row items-center gap-4">
                   {item.profilePhoto ? (
-                    <img className="size-[150px]" src={item.profilePhoto} alt="" />
+                    <img className="size-[150px] rounded-full" src={item.profilePhoto} alt="" />
                   ) : (
-                    <div className="size-[150px] p-2 flex justify-center items-center rounded-lg bg-accent">
+                    <div className="size-[150px] rounded-full p-2 flex justify-center items-center bg-accent">
                       <span className="text-xl font-semibold capitalize text-white text-center">{item.userName}</span>
                     </div>
                   )}
@@ -81,6 +106,7 @@ const ChooseCarer = () => {
               </div>
             </Link>
           ))}
+        {!loading && carers.length === 0 && <p className="text-center text-2xl font-semibold mt-12">No Caregivers Found</p>}
       </div>
     </section>
   );
