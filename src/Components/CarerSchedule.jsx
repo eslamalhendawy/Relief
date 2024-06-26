@@ -41,8 +41,8 @@ const CarerSchedule = () => {
             </div>
           )}
           {!loading && requests.length === 0 && (
-            <div className="text-center">
-              <p className="text-xl font-semibold">No requests found</p>
+            <div className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor">
+              <p className="font-semibold text-xl">No Requests Found</p>
             </div>
           )}
           {!loading &&

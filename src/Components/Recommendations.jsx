@@ -1,10 +1,32 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { getData } from "../Services/apiCalls";
 
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+
+import Rating from "@mui/material/Rating";
+import Skeleton from "@mui/material/Skeleton";
 
 import user from "/assets/user.png";
 
 const Recommendations = () => {
+  const [loading, setLoading] = useState(true);
+  const [carers, setCarers] = useState([]);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    setLoading(true);
+    setCarers([]);
+    const fetchData = async () => {
+      const response = await getData("caregiver/displayAllCaregivers", token);
+      console.log(response);
+      setCarers(response);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
   const list = [
     {
       name: "mohamed khaled",
@@ -54,31 +76,32 @@ const Recommendations = () => {
             1280: {
               slidesPerView: 4,
             },
+            1920: {
+              slidesPerView: 5,
+            },
           }}
           loop={true}
         >
-          {list.map((item, index) => (
+          {carers.map((item, index) => (
             <SwiperSlide key={index}>
-              <div className="p-6 rounded-xl bg-[#BBD0FF]">
-                <div className="flex items-center gap-2 mb-4">
-                  <img src={user} alt="" className="cursor-pointer" />
-                  <div>
-                    <h4 className="text-2xl text-white capitalize mb-2">{item.name}</h4>
-                    <div className="space-x-2">
-                      <i className="fa-solid fa-star text-[#FFC300]"></i>
-                      <i className="fa-solid fa-star text-[#FFC300]"></i>
-                      <i className="fa-solid fa-star text-[#FFC300]"></i>
-                      <i className="fa-solid fa-star text-[#FFC300]"></i>
-                      <i className="fa-solid fa-star text-[#FFC300]"></i>
+              <Link to={`/carer-profile/${item._id}`}>
+                <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                  <div className="flex items-center gap-2 mb-4">
+                    {item.profilePhoto ? (
+                      <img src={item.profilePhoto} alt="" className="cursor-pointer size-[70px] rounded-full" />
+                    ) : (
+                      <div className="size-[70px] rounded-full bg-accent flex justify-center items-center">
+                        <span className="text-xl font-semibold text-white capitalize">{item.userName[0]}</span>
+                      </div>
+                    )}
+                    <div>
+                      <h4 className="text-xl text-white font-bold capitalize mb-2 truncate">{item.userName}</h4>
+                      <Rating name="simple-controlled" className="text-2xl" value={item.averageRating} readOnly />
                     </div>
                   </div>
+                  <p className="font-semibold text-navyColor capitalize mb-4 truncate-paragraph">{item.biography}</p>
                 </div>
-                <h5 className="font-semibold text-2xl text-navyColor capitalize mb-4">{item.firstLine}</h5>
-                <div className="flex gap-2 justify-start text-pColor">
-                  <i className="fa-solid fa-quote-left"></i>
-                  <p className="text-pColor capitalize text-lg mb-4 sm:mb-0">{item.comment}</p>
-                </div>
-              </div>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

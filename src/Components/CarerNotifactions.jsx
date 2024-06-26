@@ -18,7 +18,6 @@ const CarerNotifactions = () => {
     const fetchRequests = async () => {
       setLoading(true);
       const response = await getData(`caregiver/${id}/pendingrequest`);
-      console.log(response);
       if (response.message === "No pending requests found for this caregiver") {
         setRequests([]);
         setLoading(false);
@@ -35,6 +34,7 @@ const CarerNotifactions = () => {
   const handleCancel = (item) => async () => {
     toast.info("Canceling...");
     const response = await putData(item.role === "specific" ? `/caregiver/specificRequests/reject/${item._id}` : `caregiver/publicrequests/${item._id}/reject`, {}, token);
+    console.log(response);
     if (response.message === "Request rejected successfully") {
       toast.success("Request rejected successfully");
       window.location.reload();
@@ -46,7 +46,6 @@ const CarerNotifactions = () => {
   const handleAccept = (item) => async () => {
     toast.info("Approving...");
     const response = await putData(item.role === "specific" ? `/caregiver/specificRequests/approve/${item._id}` : `caregiver/publicrequests/${item._id}/approve`, {}, token);
-    console.log(response);
     if (response.message === "Request approved successfully") {
       toast.success("Request accepted successfully");
       window.location.reload();
@@ -74,8 +73,8 @@ const CarerNotifactions = () => {
             </div>
           )}
           {!loading && requests.length === 0 && (
-            <div className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor mb-4">
-              <p className="font-semibold text-xl mb-2">No Notifications</p>
+            <div className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor">
+              <p className="font-semibold text-xl">No Notifications</p>
             </div>
           )}
           {!loading &&

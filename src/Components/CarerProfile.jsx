@@ -17,10 +17,10 @@ import calender from "/assets/calenderEmoji.png";
 const CarerProfile = () => {
   const [carer, setCarer] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [helpful, setHelpful] = useState(false);
-  const [notHelpful, setNotHelpful] = useState(false);
   const [address, setAddress] = useState("");
   const [loading2, setLoading2] = useState(true);
+  const [loading3, setLoading3] = useState(true);
+  const [reviews, setReviews] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
@@ -32,6 +32,15 @@ const CarerProfile = () => {
       }
     };
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const data = await getData(`caregiver/${id}/messageRatingse`);
+      setReviews(data);
+      setLoading3(false);
+    };
+    fetchReviews();
   }, []);
 
   useEffect(() => {
@@ -74,7 +83,7 @@ const CarerProfile = () => {
             ) : (
               <>
                 <Rating name="simple-controlled" className="text-2xl" value={carer.averageRating} readOnly />
-                <span className="font-semibold">{carer.averageRating}</span>
+                <span className="font-semibold">{Math.round(carer.averageRating)}</span>
               </>
             )}
           </div>
@@ -83,7 +92,9 @@ const CarerProfile = () => {
               <Skeleton className="mx-auto" variant="text" width="40%" height={20} />
             </div>
           ) : (
-            <p className="text-[#ADB5BD] text-center mb-8">Based on {carer.ratings.length} {carer.ratings.length === 1 ? "review" : "reviews"}</p>
+            <p className="text-[#ADB5BD] text-center mb-8">
+              Based on {carer.ratings.length} {carer.ratings.length === 1 ? "review" : "reviews"}
+            </p>
           )}
           {loading2 ? (
             <p className="text-[#343A40] mb-1 flex items-center gap-1">
@@ -166,29 +177,33 @@ const CarerProfile = () => {
             <h2 className="text-[#212529] font-semibold text-2xl md:text-4xl">Reviews</h2>
           </div>
           <div>
-            {!loading &&
-              carer.ratings.map((review, index) => (
+          {loading3 && (
+              <div className="flex flex-col gap-8">
+                <div className="rounded-xl overflow-hidden">
+                  <Skeleton animation="wave" variant="rectangular" width="100%" height={100} />
+                </div>
+                <div className="rounded-xl overflow-hidden">
+                  <Skeleton animation="wave" variant="rectangular" width="100%" height={100} />
+                </div>
+                <div className="rounded-xl overflow-hidden">
+                  <Skeleton animation="wave" variant="rectangular" width="100%" height={100} />
+                </div>
+              </div>
+          )}
+            {!loading3 &&
+              reviews.length !== 0 &&
+              reviews.map((review, index) => (
                 <div key={index} className="p-2 mb-2 rounded-xl">
                   <div className="flex gap-1 items-center mb-2">
                     <div className="flex items-center gap-1">
-                      <Rating name="read-only" readOnly className="text-2xl" value={review} />
+                      <Rating name="read-only" readOnly className="text-2xl" value={review.Info.rating} />
                     </div>
-                    <h3 className="text-[#6C757D] font-medium text-lg">{review.name}</h3>
+                    <h3 className="text-[#6C757D] font-medium text-lg">{review.PatientData.userNamePatient}</h3>
                   </div>
-                  <p className="text-[#343A40] md:text-xl mb-2">{review.text}</p>
-                  <div className="flex items-center gap-8">
-                    <button className={`text-lg flex items-center gap-1 text-[#6C757D] ${helpful && "text-black"}`} onClick={() => setHelpful(!helpful)}>
-                      <i className={`fa-${helpful ? "solid" : "regular"} fa-thumbs-up`}></i>
-                      <span>Helpful</span>
-                    </button>
-                    <button className={`text-lg flex items-center gap-1 text-[#6C757D] ${notHelpful && "text-black"}`} onClick={() => setNotHelpful(!notHelpful)}>
-                      <i className={`fa-${notHelpful ? "solid" : "regular"} fa-thumbs-down`}></i>
-                      <span>Helpful</span>
-                    </button>
-                  </div>
+                  <p className="text-[#343A40] md:text-xl mb-2">{review.Info.messageRating}</p>
                 </div>
               ))}
-            {!loading && carer.ratings.length === 0 && <p className="text-xl font-semibold text-center">No Ratings Found</p>}
+            {!loading3 && reviews.length === 0 && <p className="text-xl font-semibold text-center">No Ratings Found</p>}
           </div>
         </div>
       </div>

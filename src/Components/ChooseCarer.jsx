@@ -16,7 +16,7 @@ const ChooseCarer = () => {
     setLoading(true);
     setCarers([]);
     const fetchData = async () => {
-      const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=10` : "caregiver/displayAllCaregivers", token);
+      const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=10` : "caregivers/displayCaregiversByRating", token);
       console.log(response);
       if (filter === "all") {
         setCarers(response);
@@ -25,10 +25,7 @@ const ChooseCarer = () => {
         setCarers(response.caregiver);
         setLoading(false);
       } else if (filter === "rating") {
-        let tempList = response.filter((item) => {
-          return item.averageRating === 5 || item.averageRating === 4;
-        });
-        setCarers(tempList);
+        setCarers(response);
         setLoading(false);
       }
     };
@@ -39,7 +36,6 @@ const ChooseCarer = () => {
     setFilter(e);
     setHidden(true);
   };
-
 
   return (
     <section className="container mx-auto px-4 py-16">

@@ -15,7 +15,6 @@ const PatientNotifications = () => {
     const fetchRequests = async () => {
       setLoading(true);
       const response = await getData(`patient/${id}/requests`);
-      console.log(response);
       if (response) {
         setRequests(response);
         setLoading(false);
@@ -69,8 +68,8 @@ const PatientNotifications = () => {
             </div>
           )}
           {!loading && requests.length === 0 && (
-            <div className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor mb-4">
-              <p className="font-semibold text-xl mb-2">No Notifications</p>
+            <div className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor">
+              <p className="font-semibold text-xl">No Requests</p>
             </div>
           )}
         </div>
