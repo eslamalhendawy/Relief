@@ -10,7 +10,7 @@ const SpeakToExpert = () => {
 
   const goBack = () => {
     navigate(-1);
-  }
+  };
 
   useEffect(() => {
     document.title = "Relief | Speak To An Expert";
@@ -31,7 +31,9 @@ const SpeakToExpert = () => {
             <p className="w-fit text-navyColor font-medium text-xl">01028293040</p>
           </div>
         </div>
-        <button onClick={goBack} className="text-[#00B4D8] font-medium text-xl">Back</button>
+        <button onClick={goBack} className="text-[#00B4D8] font-medium text-xl">
+          Back
+        </button>
       </div>
     </section>
   );

@@ -78,8 +78,8 @@ const Profile = () => {
     <section className="container mx-auto px-4 py-16">
       {userData.role === "carer" && <CarerProfileHeader />}
       <div className="flex flex-col justify-center border-2 border-[#BBD0FF] rounded-xl px-4 lg:px-[100px] py-12 lg:w-[80%] mx-auto">
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between mb-8">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
             <div className="relative">
               {userData.avatar ? (
                 <img className="size-[100px] rounded-full" src={userData.avatar} alt="" />
@@ -165,7 +165,7 @@ const Profile = () => {
             </div>
           </div>
         )}
-        <div className="flex justify-end gap-4">
+        <div className="flex flex-col sm:flex-row justify-end gap-4">
           <button disabled={!update} onClick={handleUpdate} className={`capitalize  duration-200  py-1 px-12 rounded-2xl font-semibold border  text-center text-xl ${!update ? "bg-[#fafafa] hover:bg-[#fafafa] border-[#999999] text-[#bdbbbb]" : "text-white bg-accent hover:bg-red-700 border-accent"}`}>
             Save
           </button>

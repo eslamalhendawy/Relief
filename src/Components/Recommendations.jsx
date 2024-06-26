@@ -20,40 +20,11 @@ const Recommendations = () => {
     setCarers([]);
     const fetchData = async () => {
       const response = await getData("caregiver/displayAllCaregivers", token);
-      console.log(response);
       setCarers(response);
       setLoading(false);
     };
     fetchData();
   }, []);
-
-  const list = [
-    {
-      name: "mohamed khaled",
-      firstLine: "Standard & Hygienic",
-      comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-    },
-    {
-      name: "mohamed khaled",
-      firstLine: "Standard & Hygienic",
-      comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-    },
-    {
-      name: "mohamed khaled",
-      firstLine: "Standard & Hygienic",
-      comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-    },
-    {
-      name: "mohamed khaled",
-      firstLine: "Standard & Hygienic",
-      comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-    },
-    {
-      name: "mohamed khaled",
-      firstLine: "Standard & Hygienic",
-      comment: "We chose this care home because of the light spacious, airy rooms and the friendliness of the L. staff, not only to us but towards each other.",
-    },
-  ];
 
   return (
     <section className="relative mb-12">
@@ -82,28 +53,93 @@ const Recommendations = () => {
           }}
           loop={true}
         >
-          {carers.map((item, index) => (
-            <SwiperSlide key={index}>
-              <Link to={`/carer-profile/${item._id}`}>
-                <div className="p-6 rounded-xl bg-[#BBD0FF]">
-                  <div className="flex items-center gap-2 mb-4">
-                    {item.profilePhoto ? (
-                      <img src={item.profilePhoto} alt="" className="cursor-pointer size-[70px] rounded-full" />
-                    ) : (
-                      <div className="size-[70px] rounded-full bg-accent flex justify-center items-center">
-                        <span className="text-xl font-semibold text-white capitalize">{item.userName[0]}</span>
-                      </div>
-                    )}
-                    <div>
-                      <h4 className="text-xl text-white font-bold capitalize mb-2 truncate">{item.userName}</h4>
-                      <Rating name="simple-controlled" className="text-2xl" value={item.averageRating} readOnly />
-                    </div>
+          {loading && (
+            <>
+            <SwiperSlide>
+              <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Skeleton variant="circular" width={70} height={70} />
+                  <div>
+                    <Skeleton variant="text" width={200} height={30} />
+                    <Skeleton variant="text" width={200} height={30} />
                   </div>
-                  <p className="font-semibold text-navyColor capitalize mb-4 truncate-paragraph">{item.biography}</p>
                 </div>
-              </Link>
+                <Skeleton variant="text" width={300} height={30} />
+              </div>
             </SwiperSlide>
-          ))}
+            <SwiperSlide>
+              <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Skeleton variant="circular" width={70} height={70} />
+                  <div>
+                    <Skeleton variant="text" width={200} height={30} />
+                    <Skeleton variant="text" width={200} height={30} />
+                  </div>
+                </div>
+                <Skeleton variant="text" width={300} height={30} />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Skeleton variant="circular" width={70} height={70} />
+                  <div>
+                    <Skeleton variant="text" width={200} height={30} />
+                    <Skeleton variant="text" width={200} height={30} />
+                  </div>
+                </div>
+                <Skeleton variant="text" width={300} height={30} />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Skeleton variant="circular" width={70} height={70} />
+                  <div>
+                    <Skeleton variant="text" width={200} height={30} />
+                    <Skeleton variant="text" width={200} height={30} />
+                  </div>
+                </div>
+                <Skeleton variant="text" width={300} height={30} />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide>
+              <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                <div className="flex items-center gap-2 mb-4">
+                  <Skeleton variant="circular" width={70} height={70} />
+                  <div>
+                    <Skeleton variant="text" width={200} height={30} />
+                    <Skeleton variant="text" width={200} height={30} />
+                  </div>
+                </div>
+                <Skeleton variant="text" width={300} height={30} />
+              </div>
+            </SwiperSlide>
+            </>
+          )}
+          {!loading &&
+            carers.map((item, index) => (
+              <SwiperSlide key={index}>
+                <Link to={`/carer-profile/${item._id}`}>
+                  <div className="p-6 rounded-xl bg-[#BBD0FF]">
+                    <div className="flex items-center gap-2 mb-4">
+                      {item.profilePhoto ? (
+                        <img src={item.profilePhoto} alt="" className="cursor-pointer size-[70px] rounded-full" />
+                      ) : (
+                        <div className="size-[70px] rounded-full bg-accent flex justify-center items-center">
+                          <span className="text-xl font-semibold text-white capitalize">{item.userName[0]}</span>
+                        </div>
+                      )}
+                      <div>
+                        <h4 className="text-xl text-white font-bold capitalize mb-2 truncate">{item.userName}</h4>
+                        <Rating name="simple-controlled" className="text-2xl" value={item.averageRating} readOnly />
+                      </div>
+                    </div>
+                    <p className="font-semibold text-navyColor capitalize mb-4 truncate-paragraph">{item.biography}</p>
+                  </div>
+                </Link>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
       <div className="absolute bg-[#212529] w-full h-[150px] bottom-[-50px]" />

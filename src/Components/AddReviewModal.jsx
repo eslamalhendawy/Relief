@@ -26,9 +26,6 @@ const AddReviewModal = ({ id }) => {
 
   return (
     <>
-      {/* <button onClick={() => setOpen(true)} className="outline-none flex items-center justify-center gap-2 border border-[#BBD0FF] hover:bg-[#BBD0FF] rounded-2xl duration-200 p-2">
-        <span className="text-[#000814] font-medium text-lg">Add Review</span> <i className="fa-solid fa-plus text-[#00B4D8]"></i>
-      </button> */}
       <button onClick={() => setOpen(true)} className="bg-accent hover:bg-red-700 duration-200 text-white px-2 py-1 text-lg rounded-xl font-medium">
         Rate This Request
       </button>

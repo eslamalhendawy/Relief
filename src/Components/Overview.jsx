@@ -1,8 +1,3 @@
-import overview1 from "/assets/overview1.png"
-import overview2 from "/assets/overview2.png"
-import overview3 from "/assets/overview3.png"
-import overview4 from "/assets/overview4.png"
-
 const Overview = ({ headerRed, headerNavy, pTag }) => {
   const list = [
     {

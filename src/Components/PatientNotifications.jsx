@@ -32,25 +32,26 @@ const PatientNotifications = () => {
             requests.length !== 0 &&
             requests.map((item, index) => (
               <div key={index} className="bg-[#f6f3ef] p-4 rounded-xl text-navyColor mb-4">
-                <p className="font-semibold text-xl mb-2">
+                <p className="font-semibold sm:text-xl mb-2">
                   Caregiver Name: <span className="font-medium">{item.caregiverName}</span>
                 </p>
-                <p className="font-semibold text-xl mb-2">
+                <p className="font-semibold sm:text-xl mb-2">
                   Caregiver Phone: <span className="font-medium">{item.caregiverPhone}</span>
                 </p>
-                <p className="font-semibold text-xl mb-2">
-                  Caregiver Email: <span className="font-medium">{item.caregiverEmail}</span>
+                <p className="font-semibold text-xl mb-2 flex flex-col sm:flex-row">
+                  <span>Caregiver Email:</span> <span className="font-medium truncate">{item.caregiverEmail}</span>
                 </p>
-                <p className="font-semibold text-xl mb-6">
+                <p className="font-semibold sm:text-xl mb-6">
                   Date And Duration:{" "}
                   <span className="font-medium">
                     {item.appointmentDateTime.day}/{item.appointmentDateTime.month}, {item.appointmentDateTime.hours > 12 ? `${item.appointmentDateTime.hours - 12} PM` : `${item.appointmentDateTime.hours} AM`}, {item.determineThePeriodOfService.amount} {item.determineThePeriodOfService.unit}
                   </span>
                 </p>
-                <div className="flex gap-12">
-                  {/* <button className="bg-accent hover:bg-red-700 duration-200 text-white px-2 py-1 text-lg rounded-xl font-medium">Rate This Request</button> */}
+                <div className="flex flex-col sm:flex-row gap-6 sm:gap-12">
                   <AddReviewModal id={item._id} />
-                  <Link to={`/carer-profile/${item.caregiver}`} className="bg-accent hover:bg-red-700 duration-200 text-white px-2 py-1 text-lg rounded-xl font-medium">Visit Caregiver Page</Link>
+                  <Link to={`/carer-profile/${item.caregiver}`} className="bg-accent hover:bg-red-700 duration-200 text-white px-2 py-1 text-lg rounded-xl font-medium text-center">
+                    Visit Caregiver Page
+                  </Link>
                 </div>
               </div>
             ))}

@@ -162,7 +162,7 @@ const ForMe = () => {
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-between lg:w-[80%] xl:w-[70%] lg:mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 lg:w-[80%] xl:w-[70%] lg:mx-auto">
             <button onClick={() => navigate(-1)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 px-12 rounded-xl font-[500] text-center">
               Back
             </button>
@@ -181,7 +181,7 @@ const ForMe = () => {
               <p className="text-[#495057] text-lg mb-16">Relief offers freedom of choice: caregivers and customers are free to choose who they work for and who they work with, based on transparency, honesty and mutual respect. relief is a diverse and vibrant community with caregivers and customers . relief cannot -and will not- discriminate or tolerate any discrimination against any caregivers or customer.</p>
             </div>
           </div>
-          <div className="flex items-center justify-between lg:w-[80%] xl:w-[70%] lg:mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 lg:w-[80%] xl:w-[70%] lg:mx-auto">
             <button onClick={() => setStage(1)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 px-12 rounded-xl font-[500] text-center">
               Back
             </button>
@@ -296,7 +296,7 @@ const ForMe = () => {
               </button>
             </div>
           </div>
-          <div className="flex items-center justify-between lg:w-[80%] xl:w-[70%] lg:mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 lg:w-[80%] xl:w-[70%] lg:mx-auto">
             <button onClick={() => setStage(3)} className="capitalize border border-[#8D99AE] hover:border-[#BBD0FF] text-[#8D99AE] hover:text-[#003049] duration-200 py-1 w-[150px] rounded-xl font-[500] text-center">
               Back
             </button>

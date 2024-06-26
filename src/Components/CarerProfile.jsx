@@ -61,8 +61,8 @@ const CarerProfile = () => {
 
   return (
     <section className="container mx-auto px-4 py-16">
-      <div className="flex flex-col md:flex-row items-start gap-12 lg:gap-16">
-        <div className="bg-[#F6F3EF] basis-1/3 p-6 rounded-xl">
+      <div className="flex flex-col justify-center md:flex-row items-start gap-12 lg:gap-16">
+        <div className="bg-[#F6F3EF] w-full md:basis-1/3 p-6 rounded-xl">
           <div className="size-[120px] rounded-full mx-auto mb-2 overflow-hidden">
             {loading ? (
               <Skeleton variant="rectangle" width="100%" height={120} />
@@ -172,7 +172,7 @@ const CarerProfile = () => {
           )}
           <BookAppointmentModel />
         </div>
-        <div className="bg-[#F6F3EF] basis-2/3 p-6 rounded-xl">
+        <div className="bg-[#F6F3EF] w-full md:basis-2/3 p-6 rounded-xl">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-[#212529] font-semibold text-2xl md:text-4xl">Reviews</h2>
           </div>
@@ -194,13 +194,13 @@ const CarerProfile = () => {
               reviews.length !== 0 &&
               reviews.map((review, index) => (
                 <div key={index} className="p-2 mb-2 rounded-xl">
-                  <div className="flex gap-1 items-center mb-2">
+                  <div className="flex flex-col-reverse sm:flex-row gap-1 items-center mb-2">
                     <div className="flex items-center gap-1">
                       <Rating name="read-only" readOnly className="text-2xl" value={review.Info.rating} />
                     </div>
                     <h3 className="text-[#6C757D] font-medium text-lg">{review.PatientData.userNamePatient}</h3>
                   </div>
-                  <p className="text-[#343A40] md:text-xl mb-2">{review.Info.messageRating}</p>
+                  <p className="text-[#343A40] md:text-xl mb-2 text-center sm:text-left">{review.Info.messageRating}</p>
                 </div>
               ))}
             {!loading3 && reviews.length === 0 && <p className="text-xl font-semibold text-center">No Ratings Found</p>}

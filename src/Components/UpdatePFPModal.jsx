@@ -14,20 +14,23 @@ const UpdatePFPModal = () => {
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState(null);
   const [previewImage, setPreviewImage] = useState(null);
-  const fileInput = useRef(null);``
+  const [loading, setLoading] = useState(false);
+  const fileInput = useRef(null);
+  ``;
 
   const handleChange = async (e) => {
     const image = e.target.files[0];
-    if(image){
+    if (image) {
       setImage(image);
       setPreviewImage(URL.createObjectURL(image));
-    } 
+    }
   };
 
   const handleUpload = async () => {
     if (image === null) {
       return toast.error("Please select an image");
     }
+    setLoading(true);
     toast.info("Uploading...");
     const formData = new FormData();
     formData.append("profilePhoto", image);
@@ -40,6 +43,7 @@ const UpdatePFPModal = () => {
         return;
       } else {
         toast.error("Failed to update profile picture");
+        setLoading(false);
         return;
       }
     } else if (userData.role === "patient") {
@@ -51,6 +55,7 @@ const UpdatePFPModal = () => {
         return;
       } else {
         toast.error("Failed to update profile picture");
+        setLoading(false);
         return;
       }
     }
@@ -76,8 +81,8 @@ const UpdatePFPModal = () => {
             </div>
             <div className="flex justify-center mb-4">{previewImage ? <img src={previewImage} alt="new profile photo" className="rounded-full size-[250px]" /> : "No Image Selected"}</div>
             <div className="flex justify-center items-center mb-4">
-              <button onClick={handleUpload} className="text-lg bg-accent hover:bg-red-700 duration-200 text-white py-2 w-[200px] font-medium">
-                Upload
+              <button disabled={loading} onClick={handleUpload} className={`text-lg bg-accent hover:bg-red-700 duration-200 text-white py-2 w-[200px] font-medium ${loading && "bg-red-700"}`}>
+                {loading ? "Uploading..." : "Upload"}
               </button>
             </div>
           </div>

@@ -17,9 +17,7 @@ import Login from "./Components/Login";
 import SignUp from "./Components/SignUp";
 import SpeakToExpert from "./Components/SpeakToExpert";
 import GetStarted from "./Components/GetStarted";
-import ChooseCareReceiver from "./Components/ChooseCareReceiver";
 import ForMe from "./Components/ForMe";
-import ForSomeone from "./Components/ForSomeone";
 import Profile from "./Components/Profile";
 import CarerSignUp from "./Components/CarerSignUp";
 import CarerSchedule from "./Components/CarerSchedule";
@@ -106,9 +104,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/speak-to-expert" element={<SpeakToExpert />} />
           <Route path="/get-started" element={<GetStarted />} />
-          <Route path="/choose-care-receiver" element={<ChooseCareReceiver />} />
           <Route path="/arrange-care" element={<ForMe />} />
-          <Route path="/for-someone" element={<ForSomeone />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/carer-sign-up" element={<CarerSignUp />} />
           <Route path="/carer-schedule" element={<CarerSchedule />} />

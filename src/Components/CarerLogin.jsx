@@ -12,7 +12,7 @@ const CarerLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
-  const { userData, setUserData } = useAppContext();
+  const { setUserData } = useAppContext();
   const navigate = useNavigate();
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
 

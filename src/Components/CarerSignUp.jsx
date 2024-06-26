@@ -242,7 +242,7 @@ const CarerSignUp = () => {
             <div>
               <p className="text-center font-medium text-[#212529] text-lg">
                 Already have an account?{" "}
-                <Link to="/carer-sign-up" className="font-bold text-accent hover:text-red-700 duration-200 text-lg">
+                <Link to="/carer-login" className="font-bold text-accent hover:text-red-700 duration-200 text-lg">
                   Log in
                 </Link>
               </p>

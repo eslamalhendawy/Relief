@@ -17,7 +17,6 @@ const ChooseCarer = () => {
     setCarers([]);
     const fetchData = async () => {
       const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=10` : "caregivers/displayCaregiversByRating", token);
-      console.log(response);
       if (filter === "all") {
         setCarers(response);
         setLoading(false);
@@ -39,12 +38,12 @@ const ChooseCarer = () => {
 
   return (
     <section className="container mx-auto px-4 py-16">
-      <div className="flex items-center justify-between">
+      <div className="flex gap-2 items-center justify-between mb-6">
         <div className="flex items-center gap-2">
           <div className="online-indicator" />
-          <p className="text-[#38B000] text-xl font-medium">Available For Work</p>
+          <p className="text-[#38B000] sm:text-xl font-medium">Available For Work</p>
         </div>
-        <div className="relative mb-6">
+        <div className="relative">
           <button onClick={() => setHidden(!hidden)} className="relative flex items-center gap-2 text-[#212529] border border-[#00B4D8] hover:hover:bg-[#BBD0FF] duration-200 font-semibold py-2 px-6 rounded-xl text-lg">
             <span>Filter</span>
             <i className="fa-solid fa-filter"></i>
@@ -83,22 +82,22 @@ const ChooseCarer = () => {
               <div className="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 bg-[#F6F3EF] hover:bg-white duration-200 cursor-pointer border border-[#F6F3EF] hover:border-[#00B4D8] p-6 rounded-xl">
                 <div className="flex flex-col md:flex-row items-center gap-4">
                   {item.profilePhoto ? (
-                    <img className="size-[150px] rounded-full" src={item.profilePhoto} alt="" />
+                    <img className="size-[100px] md:size-[120px] rounded-full" src={item.profilePhoto} alt="" />
                   ) : (
-                    <div className="size-[150px] rounded-full p-2 flex justify-center items-center bg-accent">
-                      <span className="text-xl font-semibold capitalize text-white text-center">{item.userName}</span>
+                    <div className="size-[100px] md:size-[120px] rounded-full p-2 flex justify-center items-center bg-accent">
+                      <span className="md:text-xl font-semibold capitalize text-white text-center">{item.userName}</span>
                     </div>
                   )}
                   <div>
-                    <p className="text-xl font-medium text-[#003049] mb-2">{item.userName}</p>
-                    <p className="text-[#3E5C76] mb-4">Caregiver</p>
+                    <p className="text-xl font-medium text-[#003049] mb-2 text-center md:text-left">{item.userName}</p>
+                    <p className="text-[#3E5C76] mb-4 text-center md:text-left">Caregiver</p>
                     <div className="flex items-center gap-1">
                       <Rating name="simple-controlled" className="text-2xl" value={item.averageRating} readOnly />
                     </div>
                   </div>
                 </div>
                 <div className="bg-[#ADB5BD] w-[200px] h-[2px] md:w-[2px] md:h-[100px]" />
-                <p className="text-center md:text-left font-medium text-lg basis-1/2">{item.biography}</p>
+                <p className="text-center md:text-left font-medium text-lg w-[80%] md:basis-1/2 truncate">{item.biography}</p>
               </div>
             </Link>
           ))}

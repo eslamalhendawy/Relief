@@ -56,8 +56,8 @@ const CarerSchedule = () => {
                   <p className="font-semibold text-xl mb-2">
                     Patient Phone: <span className="font-medium">{item.caregiverPhone}</span>
                   </p>
-                  <p className="font-semibold text-xl mb-2">
-                    Patient Email: <span className="font-medium">{item.userEmail}</span>
+                  <p className="font-semibold text-xl mb-2 flex flex-col sm:flex-row">
+                    <span>Patient Email:</span> <span className="font-medium truncate">{item.userEmail}</span>
                   </p>
                   <p className="font-semibold text-xl">
                     Date And Duration:{" "}
