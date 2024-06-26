@@ -1,3 +1,4 @@
+import { useAppContext } from "../Context/AppContext";
 import care1 from "/assets/care1.png";
 import care2 from "/assets/care2.png";
 

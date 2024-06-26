@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 
 import check from "/assets/SealCheck.png";
 import clock from "/assets/Clock.png";
-import strategy from "/assets/Strategy.png"; 
+import strategy from "/assets/Strategy.png";
 import dollar from "/assets/Money.png";
 
 const Features = () => {
   const { userData } = useAppContext();
+  const role = localStorage.getItem("role");
 
   return (
-    <section className='bg-sectionColor py-12 px-4'> 
-      <div className='container mx-auto   text-[#E9ECEF] flex flex-col lg:flex-row gap-8 mb-12'>
+    <section className="bg-sectionColor py-12 px-4">
+      <div className="container mx-auto   text-[#E9ECEF] flex flex-col lg:flex-row gap-8 mb-12">
         <div className="flex flex-col items-center">
           <img src={check} alt="" />
           <h2 className="text-[#DEE2E6] font-[600] text-lg mt-2 mb-4 text-center">More Choice</h2>
@@ -33,11 +34,15 @@ const Features = () => {
           <p className="text-center xl:w-[70%] mx-auto">No surcharges, no hidden costs, and no joining fees just truly personalised care.</p>
         </div>
       </div>
-      <div className="flex justify-center">
-        <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-4 rounded-xl text-lg font-[500]">get started with relief </Link>
-      </div>
+      {role === "carer" ? null : (
+        <div className="flex justify-center">
+          <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-4 rounded-xl text-lg font-[500]">
+            get started with relief{" "}
+          </Link>
+        </div>
+      )}
     </section>
-  )
-}
+  );
+};
 
-export default Features
+export default Features;

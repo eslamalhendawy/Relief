@@ -6,6 +6,7 @@ import check from "/assets/hollowCheck.png";
 
 const ReliefCost = () => {
   const { userData } = useAppContext();
+  const role = localStorage.getItem("role");
 
   return (
     <section className="bg-[#f6f3ef]">
@@ -45,7 +46,11 @@ const ReliefCost = () => {
                 <p className="font-medium text-[20px]">No joining fees </p>
               </li>
             </ul>
-            <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-12 rounded-xl text-lg border border-accent">Get Started</Link>
+            {role === "carer" ? null : (
+              <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-12 rounded-xl text-lg border border-accent">
+                Get Started
+              </Link>
+            )}
           </div>
           <div className="bg-white px-4 py-6 rounded-xl">
             <div className="flex items-center gap-4 mb-6">
@@ -53,10 +58,6 @@ const ReliefCost = () => {
               <h5 className="text-navyColor font-semibold text-3xl lg:text-4xl capitalize">short-term care</h5>
             </div>
             <div className="flex items-center gap-6">
-              {/* <div>
-                <span className="text-[#8D99AE] text-lg">7 Days From</span>
-                <p className="text-[#0096C7] font-medium text-2xl mb-6">800 EGP</p>
-              </div> */}
               <div>
                 <span className="text-[#8D99AE] text-lg">From</span>
                 <p className="text-[#0096C7] font-medium text-2xl mb-6">
@@ -87,7 +88,11 @@ const ReliefCost = () => {
                 <p className="font-medium text-[20px]">No joining fees </p>
               </li>
             </ul>
-            <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-12 rounded-xl text-lg border border-accent">Get Started</Link>
+            {role === "carer" ? null : (
+              <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-12 rounded-xl text-lg border border-accent">
+                Get Started
+              </Link>
+            )}
           </div>
         </div>
       </div>

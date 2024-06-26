@@ -15,6 +15,7 @@ import CallAdvisor from "./CallAdvisor";
 
 const ShortTermCare = () => {
   const { userData } = useAppContext();
+  const role = localStorage.getItem("role");
   useEffect(() => {
     document.title = "Relief | Short-Term Care";
     window.scrollTo(0, 0);
@@ -27,9 +28,13 @@ const ShortTermCare = () => {
       <Overview headerRed="take" headerNavy="a breather with temporary care" pTag="Elder can arrange short-term respite care for a few days to a few weeks. A fully vetted carer will move into the home, provide care, and maintain a routine in the same way you would." />
       <CareFeature />
       <HowItWorks showP={false} />
-      <div className="flex justify-center mb-6 lg:mb-12">
-        <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-[500] border border-accent">Get Started</Link>
-      </div>
+      {role === "carer" ? null : (
+        <div className="flex justify-center mb-6 lg:mb-12">
+          <Link to={userData.loggedIn ? "/get-started" : "/login"} className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-[500] border border-accent">
+            Get Started
+          </Link>
+        </div>
+      )}
       <CareBenefits />
       <ShortTermPricing />
       <CallAdvisor />
