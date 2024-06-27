@@ -26,20 +26,22 @@ const Benefits = () => {
             <img className="" src={benefits1} alt="" />
           </div>
         </div>
-        <div className="flex flex-col lg:flex-row 2xl:justify-center items-stretch gap-8 xl:gap-16">
-          <div className="flex flex-col lg:basis-1/2 xl:max-w-[650px]">
-            <div className="w-full">
-              <img className="w-full" src={benefits2} alt="" />
+        <div className={`flex flex-col lg:flex-row items-stretch gap-8 xl:gap-16 ${!userData.loggedIn && "2xl:justify-center"}`}>
+          {!userData.loggedIn && (
+            <div className="flex flex-col lg:basis-1/2 xl:max-w-[650px]">
+              <div className="w-full">
+                <img className="w-full" src={benefits2} alt="" />
+              </div>
+              <div className="bg-white p-4 rounded-b-xl">
+                <span className="text-pColor text-xs">FOR CARERS</span>
+                <h4 className="font-semibold text-2xl lg:text-4xl text-navyColor capitalize mb-6">Become a Carer</h4>
+                <p className="text-pColor text-[16px] mb-12 lg:h-[120px] xl:h-[96px] 2xl:h-[72px]">Are you looking for an opportunity to transform the life of an older person? As a self-employed carer with relief, you can build a career that works for you, while accessing exclusive third-party rewards and support from a dedicated team</p>
+                <Link to="carer-sign-up" className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-medium mb-4 block w-fit">
+                  apply now
+                </Link>
+              </div>
             </div>
-            <div className="bg-white p-4 rounded-b-xl">
-              <span className="text-pColor text-xs">FOR CARERS</span>
-              <h4 className="font-semibold text-2xl lg:text-4xl text-navyColor capitalize mb-6">Become a Carer</h4>
-              <p className="text-pColor text-[16px] mb-12 lg:h-[120px] xl:h-[96px] 2xl:h-[72px]">Are you looking for an opportunity to transform the life of an older person? As a self-employed carer with relief, you can build a career that works for you, while accessing exclusive third-party rewards and support from a dedicated team</p>
-              <Link to="carer-sign-up" className="capitalize bg-accent hover:bg-red-700 duration-200 text-white py-2 px-6 rounded-xl text-lg font-medium mb-4 block w-fit">
-                apply now
-              </Link>
-            </div>
-          </div>
+          )}
           <div className="flex flex-col lg:basis-1/2 h-full xl:max-w-[650px]">
             <div className="w-full">
               <img className="w-full" src={benefits3} alt="" />

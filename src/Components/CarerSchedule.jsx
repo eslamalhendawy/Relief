@@ -14,6 +14,7 @@ const CarerSchedule = () => {
     const fetchRequests = async () => {
       setLoading(true);
       const response = await getData(`caregiver/${id}/requests`);
+      console.log(response);
       if (response) {
         setRequests(response);
         setLoading(false);
