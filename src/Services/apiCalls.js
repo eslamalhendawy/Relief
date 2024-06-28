@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "https://relief-1.onrender.com/api/V1/";
+const baseURL = "https://relife.codepeak.live/api/V1/";
 
 export const postData = async (url, data, token) => {
   let result = [];

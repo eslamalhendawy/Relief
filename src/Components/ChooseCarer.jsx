@@ -16,7 +16,7 @@ const ChooseCarer = () => {
     setLoading(true);
     setCarers([]);
     const fetchData = async () => {
-      const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=10` : "caregivers/displayCaregiversByRating", token);
+      const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=70` : "caregivers/displayCaregiversByRating", token);
       if (filter === "all") {
         setCarers(response);
         setLoading(false);
