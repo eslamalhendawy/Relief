@@ -15,7 +15,6 @@ const ChooseCarer = () => {
 
   const fetchData = async () => {
     const response = await getData(filter === "all" ? "caregiver/displayAllCaregivers" : filter === "nearest" ? `nearbyCaregivers?km=70` : filter === "recommended" ? `match-diseases/${id}` : "caregivers/displayCaregiversByRating", token);
-    console.log(response);
     if (filter === "all") {
       setCarers(response);
       setLoading(false);
