@@ -32,7 +32,7 @@ const CarerLogin = () => {
     const response = await postData("caregiver/signin", { email, password });
     if (response.token) {
       navigate("/");
-      toast.success("Account created successfully");
+      toast.success("Logged in successfully");
       localStorage.setItem("token", response.token);
       localStorage.setItem("role", "carer");
       localStorage.setItem("ID", response.UserData._id);
