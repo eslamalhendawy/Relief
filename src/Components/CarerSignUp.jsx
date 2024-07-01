@@ -72,6 +72,7 @@ const CarerSignUp = () => {
     if (gender === "" || tempDate === "" || doYouSmoke === null || canYouDrive === null) {
       return toast.error("Please fill all the fields");
     }
+    toast.info("Creating account...");
     const response = await postData("caregiver/signup", { userName, email, password, re_password, gender, dateOfBirth, phone, doYouSmoke, canYouDrive, longitude, latitude, biography });
     toast.info("Creating account...");
     if (response.token) {
@@ -96,7 +97,6 @@ const CarerSignUp = () => {
         loggedIn: true,
       });
     }
-    console.log();
   };
 
   const handleLocation = () => {
